@@ -1,4 +1,4 @@
-<form action="../CONTROLADOR/procesoLogin.php" method="post">
+<form action="login.php" method="post">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required><br>
 

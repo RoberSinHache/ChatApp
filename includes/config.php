@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 $host = '127.0.0.1';
 $db = 'chatapp';

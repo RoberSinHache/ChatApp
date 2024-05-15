@@ -1,5 +1,5 @@
 <?php
-require '../MODELO/config.php';
+require 'includes/config.php';
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
@@ -12,7 +12,7 @@ if (isset($_GET['token'])) {
         $stmt = $pdo->prepare('UPDATE usuarios SET activo = 1, token = NULL WHERE id = ?');
         $stmt->execute([$usuario['id']]);
 
-        echo 'Tu cuenta se ha activado con éxito. Ya puedes iniciar sesión. <a href="../VISTA/login.php">Inicia sesión</a>';
+        echo 'Tu cuenta se ha activado con éxito. Ya puedes iniciar sesión. <a href="login">Inicia sesión</a>';
     } else {
         echo 'Token inválido o cuenta ya registrada';
     }

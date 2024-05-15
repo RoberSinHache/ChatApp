@@ -1,5 +1,5 @@
 <?php
-require '../MODELO/config.php';
+require 'includes/config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -62,10 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $mail->isHTML(true);
             $mail->Subject = 'Completa el registro';
-            $mail->Body    = "Clica en el siguiente enlace para completar el registro: <a href='http://chatapp.local/CONTROLADOR/procesoVerificarRegistro.php?token=$token'>Finalizar registro</a>";
+            $mail->Body    = "Clica en el siguiente enlace para completar el registro: <a href='http://chatapp.local/index.php?pagina=verificacion&token=$token'>Finalizar registro</a>";
 
             $mail->send();
-            echo 'Registro finalizado con éxito, comprueba tu correo para acceder al enlace de verificaión';
+            header('Location: login');
+            exit();
 
 
         } catch (Exception $e) {
@@ -76,5 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<p>$error</p>";
         }
     }
+} else {
+    header('Location: login');
 }
 ?>

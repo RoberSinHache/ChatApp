@@ -1,5 +1,5 @@
 <?php
-require '../MODELO/config.php';
+require 'includes/config.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (password_verify($contrasenia, $usuario['contraseña'])) {
                     $_SESSION['id_usuario'] = $usuario['id'];
                     $_SESSION['nombre_usuario'] = $usuario['nombre'];
-                    echo 'Inicio de sesión correcto. Bienvenido: ' . htmlspecialchars($usuario['nombre']) . '!';
+                    header('Location: home');
+                    exit();
                 } else {
                     echo 'El correo o contraseña no son correctos';
                 }
