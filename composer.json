@@ -1,0 +1,17 @@
+{
+    "name": "rober/chat-app",
+    "autoload": {
+        "psr-4": {
+            "Rober\\ChatApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rober",
+            "email": "elroberbtw@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
