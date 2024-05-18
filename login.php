@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (password_verify($contrasenia, $usuario['contraseña'])) {
                     $_SESSION['id_usuario'] = $usuario['id'];
                     $_SESSION['nombre_usuario'] = $usuario['nombre'];
+                    $_SESSION['imagen_perfil'] = $usuario['imagen_perfil'];
                     header('Location: home');
                     exit();
                 } else {

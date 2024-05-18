@@ -1,6 +1,4 @@
 <?php
-require 'includes/config.php';
-
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'bienvenida';
 
 include 'templates/header.php';
@@ -16,14 +14,19 @@ switch ($pagina) {
         include 'verificacion.php';
         break;
     case 'home':
-        include 'home.php';
+        include 'templates/home.php';
         break;
+    case 'recuperar_contrasenia':
+        include 'templates/recuperar_contrasenia.php';
+        break;
+    case 'nueva_contrasenia':
+        include 'nueva_contrasenia.php';
     default:
         echo '<h2>Bienvenido a la página de inicio</h2>';
         echo '<p>ChatApp aún está en desarrollo</p>';
-        echo '<a href=/login>Login</a>';
+        echo '<a href=login>Login</a>';
         echo '<br>';
-        echo '<a href=/registro>Registro</a>';
+        echo '<a href=registro>Registro</a>'; 
         break;
 }
 

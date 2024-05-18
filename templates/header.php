@@ -11,6 +11,7 @@
 
     <!-- ESTILO --> 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
 
 </head>
 <body class="container-fluid col-2">

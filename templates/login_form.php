@@ -5,5 +5,7 @@
     <label for="contrasenia">Contraseña:</label>
     <input type="password" id="contrasenia" name="contrasenia" required><br>
 
+    <a href="recuperar_contrasenia">Recuperar contraseña</a>
+
     <input type="submit" value="Login">
 </form>

@@ -1,8 +1,6 @@
 <?php
+include 'includes/mail_config.php';
 require 'includes/config.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 function validateEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL) &&
@@ -19,27 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contrasenia = $_POST['contrasenia'];
     $repetir_contrasenia = $_POST['repetir_contrasenia'];
 
-    $errors = [];
+    $errores = [];
 
     $stmt = $pdo->prepare('SELECT COUNT(*) FROM usuarios WHERE nombre = ?');
     $stmt->execute([$nombre]);
     if ($stmt->fetchColumn() > 0) {
-        $errors[] = 'El nombre de usuario ya existe';
+        $errores[] = 'El nombre de usuario ya existe';
     }
 
     if (!validateEmail($email)) {
-        $errors[] = 'El correo no es válido';
+        $errores[] = 'El correo no es válido';
     }
 
     if (!validatePassword($contrasenia)) {
-        $errors[] = 'La contraseña ha de contener 8 caracteres y al menos una letra o número';
+        $errores[] = 'La contraseña ha de contener 8 caracteres y al menos una letra o número';
     }
 
     if ($contrasenia !== $repetir_contrasenia) {
-        $errors[] = 'Las contraseñas no coinciden';
+        $errores[] = 'Las contraseñas no coinciden';
     }
 
-    if (empty($errors)) {
+    if (empty($errores)) {
         $contrasenia_hasheada = password_hash($contrasenia, PASSWORD_DEFAULT);
 
         $token = bin2hex(random_bytes(16));
@@ -47,22 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare('INSERT INTO usuarios (nombre, email, contraseña, token) VALUES (?, ?, ?, ?)');
         $stmt->execute([$nombre, $email, $contrasenia_hasheada, $token]);
 
-        $mail = new PHPMailer(true);
         try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'asistentechatapp@gmail.com';
-            $mail->Password = 'oadvsnbzgriifkau';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-
-            $mail->setFrom('asistentechatapp@gmail.com', 'Rober');
-            $mail->addAddress($email, $nombre);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'Completa el registro';
-            $mail->Body    = "Clica en el siguiente enlace para completar el registro: <a href='http://chatapp.local/index.php?pagina=verificacion&token=$token'>Finalizar registro</a>";
+            $mail->addAddress($email);
+            $mail->Subject = 'Sólo un paso más';
+            $mail->Body    = "<h3>Bienvenido a ChatApp $nombre</h3><br>Clica en el siguiente enlace para completar el registro: <a href='http://chatapp.local/index.php?pagina=verificacion&token=$token'>Finalizar registro</a>";
 
             $mail->send();
             header('Location: login');
@@ -73,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "El mensaje no se pudo enviar: {$mail->ErrorInfo}";
         }
     } else {
-        foreach ($errors as $error) {
+        foreach ($errores as $error) {
             echo "<p>$error</p>";
         }
     }
