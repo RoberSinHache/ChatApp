@@ -19,14 +19,3 @@ try {
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-
-$mailConfig = [
-    'host' => 'smtp.gmail.com', 
-    'smtp_auth' => true,
-    'username' => 'asistentechatapp@gmail.com', 
-    'password' => 'oadvsnbzgriifkau',
-    'smtp_secure' => PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS,
-    'port' => 587,
-    'from_email' => 'asistentechatapp@gmail.com',
-    'from_name' => 'ChatApp'
-];
