@@ -1,10 +1,13 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 require 'includes/config.php';
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
 
-    $consulta = $pdo->prepare("SELECT email FROM reseteo_contraseñas WHERE token = ? AND tiempo_expiracion > NOW()");
+    $consulta = $pdo->prepare("SELECT email FROM reseteo_contraseñas WHERE token = ? AND fecha_expiracion > NOW()");
     $consulta->execute([$token]);
     $solicitudDeCambio = $consulta->fetch();
     

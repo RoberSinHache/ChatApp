@@ -1,5 +1,17 @@
 <div class="chat-app">
     <div class="seccion-chats-grupos">
+        <div>
+            <h3>Usuarios</h3>
+            <div class="seccion-usuarios">
+                
+            </div>
+        </div>
+        <div>
+            <h3>Grupos</h3>
+            <div class="seccion-grupos">
+
+            </div>
+        </div>
         <button id="boton-agregar-usuario">Agregar usuario</button>
         <button id="boton-crear-grupo">Crear grupo</button>
     </div>
@@ -9,12 +21,12 @@
         <div class="ventana-chat">
         </div>
         <div class="chat-input">
-            <form id="datos-envio-form" enctype="multipart/form-data">
-                <input type="number" name="id_destinatario" id="id_destinatario">
-                <input type="number" name="id_grupo" id="id_grupo">
-                <input type="text" name="tipo_contenido" id="tipo_contenido" value="text">
+            <form id="datos-envio-form" enctype="multipart/form-data" action="envio_mensaje.php">
+                <input type="hidden" name="id_destinatario" id="id_destinatario" value="">
+                <input type="hidden" name="id_grupo" id="id_grupo" value="">
+                <input type="text" name="tipo_contenido" id="tipo_contenido" value="texto">
                 <textarea name="contenido" id="contenido" placeholder="Mensaje a enviar..."></textarea>
-                <input type="file" name="archivo" id="archivo"">
+                <input type="file" name="archivo" id="archivo">
                 <button type="submit">Enviar</button>
             </form>
         </div>

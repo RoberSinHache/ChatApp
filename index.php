@@ -1,4 +1,5 @@
 <?php
+
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'bienvenida';
 
 include 'templates/header.php';
@@ -21,6 +22,7 @@ switch ($pagina) {
         break;
     case 'nueva_contrasenia':
         include 'nueva_contrasenia.php';
+        break;
     default:
         echo '<h2>Bienvenido a la página de inicio</h2>';
         echo '<p>ChatApp aún está en desarrollo</p>';

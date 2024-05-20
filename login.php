@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 require 'includes/config.php';
 session_start();
 
@@ -7,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contrasenia = $_POST['contrasenia'];
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($contrasenia)) {
-        $stmt = $pdo->prepare('SELECT id, nombre, contraseña, activo FROM usuarios WHERE email = ?');
+        $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE email = ?');
         $stmt->execute([$email]);
         $usuario = $stmt->fetch();
 

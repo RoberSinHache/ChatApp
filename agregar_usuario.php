@@ -1,8 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
 include './includes/common.php';
 
 
@@ -21,7 +20,7 @@ $consulta->execute([$nombre]);
 $usuario_objetivo = $consulta->fetch();
 
 if ($usuario_objetivo) {
-    $consulta = $pdo->prepare("INSERT INTO mensajes_privados (id_usuario, chat) VALUES (?, ?)");
+    $consulta = $pdo->prepare("INSERT INTO mensajes_privados (id_usuario_1, id_usuario_2) VALUES (?, ?)");
     $consulta->execute([$id_usuario, $usuario_objetivo['id']]);
     echo json_encode(['status' => 'success']);
 

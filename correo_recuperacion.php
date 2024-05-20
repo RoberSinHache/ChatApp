@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 require 'includes/mail_config.php';
 require 'includes/config.php';
 
@@ -11,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($usuario) {
         $token = bin2hex(random_bytes(50));
-        $tiempo_expiracion = date("Y-m-d H:i:s", strtotime('+1 hour'));
+        $fecha_expiracion = date("Y-m-d H:i:s", strtotime('+1 hour'));
         
-        $consulta = $pdo->prepare("INSERT INTO reseteo_contraseñas (email, token, tiempo_expiracion) VALUES (?, ?, ?)");
-        $consulta->execute([$email, $token, $tiempo_expiracion]);
+        $consulta = $pdo->prepare("INSERT INTO reseteo_contraseñas (email, token, fecha_expiracion) VALUES (?, ?, ?)");
+        $consulta->execute([$email, $token, $fecha_expiracion]);
 
         try {
             $mail->addAddress($email);

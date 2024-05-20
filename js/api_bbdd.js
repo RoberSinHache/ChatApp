@@ -37,17 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(datos => {
-            console.log(datos);
             if (datos.status === 'success') {
                 cargarConversacionesYGrupos();
                 document.getElementById('agregar-usuario-modal').style.display = 'none';
             } else {
-                alert(datos.mensaje);
+
             }
         })
         .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-            alert('An error occurred while adding the user. Please try again.' + error);
+            console.error('No se pudo agregar al usuario', error);
         });
     });
 
@@ -64,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mostrarListaChats();
                 document.getElementById('crear-grupo-modal').style.display = 'none';
             } else {
-                alert(datos.mensaje);
+
             }
         });
     });
@@ -78,51 +76,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mostrarListaChats(datos) {
-        const seccionChats = document.querySelector('.seccion-chats-grupos');
-        seccionChats.innerHTML = '';
+        const seccionUsuarios = document.querySelector('.seccion-usuarios');
+        const seccionGrupos = document.querySelector('.seccion-grupos');
+        seccionUsuarios.innerHTML = '';
+        seccionGrupos.innerHTML = '';
 
         datos.usuarios.forEach(usuario => {
             const elementoUsuario = document.createElement('div');
             elementoUsuario.textContent = usuario.nombre;
             elementoUsuario.addEventListener('click', () => cargarMensajes(usuario.id, 'usuario'));
-            seccionChats.appendChild(elementoUsuario);
+            seccionUsuarios.appendChild(elementoUsuario);
         });
 
         datos.grupos.forEach(grupo => {
             const elementoGrupo = document.createElement('div');
             elementoGrupo.textContent = grupo.nombre;
             elementoGrupo.addEventListener('click', () => cargarMensajes(grupo.id, 'grupo'));
-            seccionChats.appendChild(elementoGrupo);
+            seccionGrupos.appendChild(elementoGrupo);
         });
-
-        const botonAgregarUsuario = document.createElement('button');
-        botonAgregarUsuario.textContent = 'Agregar Usuario';
-        botonAgregarUsuario.id = 'boton-agregar-usuario';
-        botonAgregarUsuario.addEventListener('click', function() {
-            document.getElementById('agregar-usuario-modal').style.display = 'block';
-        });
-        seccionChats.appendChild(botonAgregarUsuario);
-
-        const botonCrearGrupo = document.createElement('button');
-        botonCrearGrupo.textContent = 'Crear Grupo';
-        botonCrearGrupo.id = 'boton-crear-grupo';
-        botonCrearGrupo.addEventListener('click', function() {
-            document.getElementById('crear-grupo-modal').style.display = 'block';
-        });
-        seccionChats.appendChild(botonCrearGrupo);
     }
 
     function cargarMensajes(destinatario, tipo) {
         fetch(`cargar_conversacion.php?destinatario=${destinatario}&tipo=${tipo}`)
             .then(response => response.json())
             .then(mensajes => {
+                document.getElementById('id_destinatario').value = destinatario;
                 mostrarMensajes(mensajes);
-            });
+            })
+            .catch(error => console.error('Ocurrió un error cargando los mensajes', error)
+        );
     }
 
     function mostrarMensajes(mensajes) {
         const ventanaChat = document.querySelector('.ventana-chat');
-        ventanaChat.innerHTML = '';
+        ventanaChat.innerHTML = '';      
 
         mensajes.forEach(mensaje => {
             const elementoMensaje = document.createElement('div');
@@ -149,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 elementoVideo.controls = true;
 
                 contenidoMensaje.appendChild(elementoVideo);
+
             } else if (mensaje.tipo_contenido === 'archivo') {
                 const elementoArchivo = document.createElement('a');
                 elementoArchivo.href = mensaje.ruta_archivo;
@@ -165,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function enviarMensaje(e) {
         e.preventDefault();
         const datosEnvio = new FormData(document.getElementById('datos-envio-form'));
-        console.log(datosEnvio);
 
         fetch('envio_mensaje.php', {
             method: 'POST',
