@@ -1,26 +1,29 @@
-<div class="chat-app">
+<div class="aplicacion-chat">
     <div class="seccion-chats-grupos">
         <div>
             <h3>Usuarios</h3>
             <div class="seccion-usuarios">
-                
+                <!-- Usuarios -->
             </div>
         </div>
         <div>
             <h3>Grupos</h3>
             <div class="seccion-grupos">
-
+                <!-- Grupos -->
             </div>
         </div>
         <button id="boton-agregar-usuario">Agregar usuario</button>
         <button id="boton-crear-grupo">Crear grupo</button>
     </div>
-    <div class="chat-window">
-        <div class="chat-header">
+    <div class="ventana-chat">
+        <div class="encabezado-chat">
+            <!-- Encabezado del chat -->
         </div>
-        <div class="ventana-chat">
+        <div class="contenido-chat">
+            <!-- Mensajes del chat -->
         </div>
-        <div class="chat-input">
+        
+        <div class="entrada-chat">
             <form id="datos-envio-form" enctype="multipart/form-data" action="envio_mensaje.php">
                 <input type="hidden" name="id_destinatario" id="id_destinatario" value="">
                 <input type="hidden" name="id_grupo" id="id_grupo" value="">
@@ -31,6 +34,8 @@
             </form>
         </div>
     </div>
+
+
 
     <div id="agregar-usuario-modal" class="modal">
         <div class="contenido-modal">
@@ -44,7 +49,6 @@
         </div>
     </div>
 
-    <!-- Create Group Modal -->
     <div id="crear-grupo-modal" class="modal">
         <div class="contenido-modal">
             <span class="boton-cerrar" id="cerrar-crear-grupo-modal">&times;</span>
@@ -63,7 +67,5 @@
         <button type="submit">Cerrar sesión</button>
     </form>
 
-    <script src="/js/api_bbdd.js"></script>
+    <script src="js/scripts.js"></script>
 </div>
-
-

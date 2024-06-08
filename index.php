@@ -24,11 +24,8 @@ switch ($pagina) {
         include 'nueva_contrasenia.php';
         break;
     default:
-        echo '<h2>Bienvenido a la página de inicio</h2>';
-        echo '<p>ChatApp aún está en desarrollo</p>';
-        echo '<a href=login>Login</a>';
-        echo '<br>';
-        echo '<a href=registro>Registro</a>'; 
+    case 'nueva_contrasenia':
+        include 'templates/bienvenida.php';
         break;
 }
 

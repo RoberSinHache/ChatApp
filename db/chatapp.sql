@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2024 at 12:17 AM
+-- Generation Time: May 27, 2024 at 08:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,13 +63,6 @@ CREATE TABLE `mensajes_privados` (
   `id_usuario_2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `mensajes_privados`
---
-
-INSERT INTO `mensajes_privados` (`id`, `id_usuario_1`, `id_usuario_2`) VALUES
-(9, 19, 18);
-
 -- --------------------------------------------------------
 
 --
@@ -111,14 +104,6 @@ CREATE TABLE `usuarios` (
   `token` varchar(255) DEFAULT NULL,
   `activo` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `imagen_perfil`, `token`, `activo`) VALUES
-(18, 'Rober', 'asistentechatapp@gmail.com', '$2y$10$tjuWp3EbTE5TMnZ1vpEoC.qJM87c0fp4lfhbhlxp21YBKl0XOHvuq', '\'porDefecto.png\'', NULL, 1),
-(19, 'a', 'a@a.com', '$2y$10$d2PuqmXA8BvEKfeQgKfSbOBFPv.1QsuZUm0LedQbw91/KefstARjy', '\'porDefecto.png\'', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -179,37 +164,37 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `mensajes_privados`
 --
 ALTER TABLE `mensajes_privados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `miembros_grupos`
 --
 ALTER TABLE `miembros_grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `reseteo_contraseñas`
 --
 ALTER TABLE `reseteo_contraseñas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
