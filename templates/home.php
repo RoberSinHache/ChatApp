@@ -14,6 +14,10 @@
         </div>
         <button id="boton-agregar-usuario">Agregar usuario</button>
         <button id="boton-crear-grupo">Crear grupo</button>
+
+        <form action="cerrar_sesion.php">
+            <button class="cerrar-sesion" type="submit">Cerrar sesión</button>
+        </form>
     </div>
     <div class="ventana-chat">
         <div class="encabezado-chat">
@@ -25,12 +29,17 @@
         
         <div class="entrada-chat">
             <form id="datos-envio-form" enctype="multipart/form-data" action="envio_mensaje.php">
-                <input type="hidden" name="id_destinatario" id="id_destinatario" value="">
+                <input type="hidden" name="id_destinatario" id="id_destinatario" value="22">
                 <input type="hidden" name="id_grupo" id="id_grupo" value="">
-                <input type="text" name="tipo_contenido" id="tipo_contenido" value="texto">
+                <input type="hidden" name="tipo_contenido" id="tipo_contenido" value="texto" hidden>
                 <textarea name="contenido" id="contenido" placeholder="Mensaje a enviar..."></textarea>
-                <input type="file" name="archivo" id="archivo">
-                <button type="submit">Enviar</button>
+
+                <label for="archivo" id="archivo-label">
+                    <span id="archivo-icono-imagen" style="cursor: pointer;"><i class="icono-imagen"></i></span>
+                    <input type="file" id="archivo" name="archivo" accept="image/*, video/*"> 
+                </label>
+                <button type="submit" id="enviar-btn"><i class="icono-enviar"></i></button>
+
             </form>
         </div>
     </div>
@@ -63,9 +72,6 @@
         </div>
     </div>
 
-    <form action="cerrar_sesion.php">
-        <button type="submit">Cerrar sesión</button>
-    </form>
-
     <script src="js/scripts.js"></script>
+    <script src="js/detectar_archivo.js"></script>
 </div>

@@ -1,16 +1,13 @@
-<form action='registro.php' method='post'>
-    <label for='nombre'>Nombre:</label>
-    <input type='text' id='nombre' name='nombre' required><br>
+<div class="contenedor-formulario-previo">
+    <form action='registro.php'class="formulario-previo" method='post'>
+        <h1>Registro</h1>
 
-    <label for='email'>Email:</label>
-    <input type='email' id='email' name='email' required><br>
+        <input type='text' id='nombre' name='nombre' placeholder="Usuario" required><br>
+        <input type='email' id='email' name='email' placeholder="Email" required><br>
+        <input type='password' id='contrasenia' name='contrasenia' placeholder="Contraseña" required><br>
+        <input type='password' id='repetir_contrasenia' name='repetir_contrasenia' placeholder="Repetir contraseña" required><br>
 
-    <label for='contrasenia'>Contraseña:</label>
-    <input type='password' id='contrasenia' name='contrasenia' required><br>
-
-    <label for='repetir_contrasenia'>Repetir contraseña:</label>
-    <input type='password' id='repetir_contrasenia' name='repetir_contrasenia' required><br>
-
-    <input type='submit' value='Registrarse'>
-</form>
+        <input type='submit' value='Registrarse'>
+    </form>
+</div>
 

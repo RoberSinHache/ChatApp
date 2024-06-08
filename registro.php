@@ -5,12 +5,12 @@ error_reporting(E_ALL);
 include 'includes/mail_config.php';
 require 'includes/config.php';
 
-function validateEmail($email) {
+function validarEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL) &&
            preg_match('/^[^@]+@(hotmail|gmail|yahoo|outlook)\.(com|es)$/', $email);
 }
 
-function validatePassword($contrasenia) {
+function validarContrasenia($contrasenia) {
     return strlen($contrasenia) >= 8 && preg_match('/[A-Za-z0-9]/', $contrasenia);
 }
 
@@ -28,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = 'El nombre de usuario ya existe';
     }
 
-    if (!validateEmail($email)) {
+    if (!validarEmail($email)) {
         $errores[] = 'El correo no es válido';
     }
 
-    if (!validatePassword($contrasenia)) {
+    if (!validarContrasenia($contrasenia)) {
         $errores[] = 'La contraseña ha de contener 8 caracteres y al menos una letra o número';
     }
 

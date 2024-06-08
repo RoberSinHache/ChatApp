@@ -17,19 +17,26 @@ function cargarConversacionesYGrupos() {
 function enviarMensaje(e) {
     e.preventDefault();
     const datosEnvio = new FormData(document.getElementById('datos-envio-form'));
+    console.log(datosEnvio.get('contenido').trim());
+    console.log(datosEnvio.get('archivo').size);
 
-    fetch('envio_mensaje.php', {
-        method: 'POST',
-        body: datosEnvio
-    })
-    .then(response => response.json())
-    .then(datos => {
-        if (datos.status === 'success') {
-            const destinatario = datosEnvio.get('id_destinatario') || datosEnvio.get('id_grupo');
-            const tipo = datosEnvio.get('id_destinatario') ? 'usuario' : 'grupo';
-            cargarMensajes(destinatario, tipo);
-        }
-    });
+    if (datosEnvio.get('contenido').trim() !== '' || datosEnvio.get('archivo').size > 0) {
+        fetch('envio_mensaje.php', {
+            method: 'POST',
+            body: datosEnvio
+        })
+        .then(response => response.json())
+        .then(datos => {
+            if (datos.status === 'success') {
+                const destinatario = datosEnvio.get('id_destinatario') || datosEnvio.get('id_grupo');
+                const tipo = datosEnvio.get('id_destinatario') ? 'usuario' : 'grupo';
+                document.getElementById('contenido').value = '';
+                cargarMensajes(destinatario, tipo);
+            }
+        });
+    } else{
+        console.log("No se envia");
+    }
 }
 
 document.getElementById('boton-agregar-usuario').addEventListener('click', function() {
@@ -144,7 +151,6 @@ function mostrarMensajes(mensajes) {
     contenidoChat.innerHTML = '';      
 
     mensajes.forEach(mensaje => {
-        console.log(mensaje);
         const elementoMensaje = document.createElement('div');
         elementoMensaje.className = 'mensaje';
 

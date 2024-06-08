@@ -1,6 +1,6 @@
 <?php
 
-$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'bienvenida';
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'login';
 
 include 'templates/header.php';
 
@@ -22,10 +22,6 @@ switch ($pagina) {
         break;
     case 'nueva_contrasenia':
         include 'nueva_contrasenia.php';
-        break;
-    default:
-    case 'nueva_contrasenia':
-        include 'templates/bienvenida.php';
         break;
 }
 

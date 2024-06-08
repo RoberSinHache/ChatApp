@@ -22,14 +22,13 @@ if (isset($_GET['token'])) {
 }
 ?>
 
-<form action="actualizar_contrasenia.php" method="post">
-    <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+<div class="contenedor-formulario-previo">
+    <form action="actualizar_contrasenia.php" method="post" class='formulario-previo'>
+        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
 
-    <label for="contrasenia">Nueva contraseña:</label>
-    <input type="password" name="contrasenia" required>
+        <input type="password" name="contrasenia" placeholder="Nueva contraseña" required>
+        <input type="password" name="confirmar_contrasenia" placeholder="Confirmar contraseña" required>
 
-    <label for="confirmar_contrasenia">Confirmar contraseña:</label>
-    <input type="password" name="confirmar_contrasenia" required>
-
-    <input type="submit" value="Actualizar contraseña">
-</form>
+        <input type="submit" value="Actualizar contraseña">
+    </form>
+</div>
