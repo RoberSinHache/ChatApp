@@ -33,6 +33,7 @@ function enviarMensaje(e) {
                 const tipo = datosEnvio.get('id_destinatario') ? 'usuario' : 'grupo';
                 document.getElementById('contenido').value = '';
                 cargarMensajes(destinatario, tipo);
+
             }
         });
     }

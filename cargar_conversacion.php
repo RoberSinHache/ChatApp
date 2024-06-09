@@ -4,6 +4,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 include './includes/common.php';
 
+$id_remitente = $_SESSION['id_usuario'];
 $destinatario = $_GET['destinatario'];
 $tipo = $_GET['tipo']; 
 
@@ -15,7 +16,7 @@ if ($tipo == 'usuario') {
                            WHERE (m.id_remitente = ? AND m.id_destinatario = ?) 
                            OR (m.id_remitente = ? AND m.id_destinatario = ?)
                            ORDER BY m.fecha_envio');
-    $stmt->execute([$_SESSION['id_usuario'], $destinatario, $destinatario, $_SESSION['id_usuario']]);
+    $stmt->execute([$id_remitente, $destinatario, $destinatario, $id_remitente]);
 
 
 // Mensajes de grupo

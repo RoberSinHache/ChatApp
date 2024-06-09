@@ -29,7 +29,7 @@
         
         <div class="entrada-chat">
             <form id="datos-envio-form" enctype="multipart/form-data" action="envio_mensaje.php">
-                <input type="hidden" name="id_destinatario" id="id_destinatario" value="22">
+                <input type="hidden" name="id_destinatario" id="id_destinatario" value="">
                 <input type="hidden" name="id_grupo" id="id_grupo" value="">
                 <input type="hidden" name="tipo_contenido" id="tipo_contenido" value="texto" hidden>
                 <textarea name="contenido" id="contenido" placeholder="Mensaje a enviar..."></textarea>
