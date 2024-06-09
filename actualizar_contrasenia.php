@@ -2,7 +2,9 @@
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
+
 require 'includes/config.php';
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $token = $_POST['token'];
@@ -27,10 +29,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $consulta = $pdo->prepare("DELETE FROM reseteo_contraseñas WHERE email = ?");
         $consulta->execute([$email]);
         
-        echo "Has actualizado tu contraseña satisfactoriamente, ya puedes <a href='login'>iniciar sesión!</a>";
+        $_SESSION['mensaje_sesion'] = "Se ha cambiado la contraseña satisfactoriamente";
+        $_SESSION['tipo_mensaje'] = "ok";
+
+        header('Location: login');
+        exit();
 
     } else {
-        die("El token no es válido o ha expirado. Recuerda que tienes una hora para actualizarla");
+        $_SESSION['mensaje_sesion'] = "El token no es válido o ha expirado. Recuerda que tienes una hora para actualizarla";
+        $_SESSION['tipo_mensaje'] = "error";
+
+        header('Location: recuperar_contrasenia');
+        exit();
     }
+
+} else {
+    header('Location: login');
+    exit();
 }
 ?>

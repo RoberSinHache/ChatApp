@@ -4,6 +4,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 include 'includes/mail_config.php';
 require 'includes/config.php';
+session_start();
 
 function validarEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL) &&
@@ -26,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$nombre]);
     if ($stmt->fetchColumn() > 0) {
         $errores[] = 'El nombre de usuario ya existe';
+    }
+
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM usuarios WHERE email = ?');
+    $stmt->execute([$email]);
+    if ($stmt->fetchColumn() > 0) {
+        $errores[] = 'El correo ya pertenece a otro usuario';
     }
 
     if (!validarEmail($email)) {
@@ -54,19 +61,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Body    = "<h3>Bienvenido a ChatApp $nombre</h3><br>Clica en el siguiente enlace para completar el registro: <a href='http://chatapp.local/index.php?pagina=verificacion&token=$token'>Finalizar registro</a>";
 
             $mail->send();
+
+            $_SESSION['mensaje_sesion'] = "Se ha enviado un correo de confirmación. Revise su bandeja de entrada";
+            $_SESSION['tipo_mensaje'] = "ok";
             header('Location: login');
             exit();
 
 
         } catch (Exception $e) {
-            echo "El mensaje no se pudo enviar: {$mail->ErrorInfo}";
+            $errores[] = "No se pudo enviar el correo de confirmación.";
+            $_SESSION['errores'] = $errores;
+            header('Location: registro');
+            exit();
         }
+
     } else {
-        foreach ($errores as $error) {
-            echo "<p>$error</p>";
-        }
+        $_SESSION['errores'] = $errores;
+        header('Location: registro');
+        exit();
     }
+
 } else {
     header('Location: login');
+    exit();
 }
 ?>

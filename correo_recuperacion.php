@@ -2,8 +2,10 @@
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
+
 require 'includes/mail_config.php';
 require 'includes/config.php';
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
@@ -22,22 +24,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $mail->addAddress($email);
             $mail->Subject = htmlspecialchars('Cambia tu contraseña');
-            $mail->Body    = "Clica en el siguiente enlace para establecer una nueva: <a href='http://chatapp.local/nueva_contrasenia.php?token=$token'>Cambiar contraseña</a>";
+            $mail->Body    = "Clica en el siguiente enlace para establecer una nueva: <a href='http://chatapp.local/index.php?pagina=nueva_contrasenia&token=$token'>Cambiar contraseña</a>";
 
             if($mail->send()) {
-                echo "Se ha enviado un correo para que puedas cambiar tu contraseña. Revisa tu bandeja de entrada<br>";
-                echo "<a href='login'>Inciar sesion</a>";
+                $_SESSION['mensaje_sesion'] = "Se ha enviado un correo para que puedas cambiar tu contraseña. Revisa tu bandeja de entrada";
+                $_SESSION['tipo_mensaje'] = "ok";
+        
+                header('Location: login');
+                exit();
+
             } else {
-                echo "No se pudo enviar el correo";
+                $_SESSION['mensaje_sesion'] = "No se pudo enviar el correo.";
+                $_SESSION['tipo_mensaje'] = "error";
+        
+                header('Location: login');
+                exit();
             }
 
 
         } catch (Exception $e) {
-            echo "El mensaje no se pudo enviar: {$mail->ErrorInfo}";
+            $_SESSION['mensaje_sesion'] = "No se pudo enviar el correo.";
+            $_SESSION['tipo_mensaje'] = "error";
+    
+            header('Location: recuperar_contrasenia');
+            exit();
         }
 
     } else {
-        echo "No existe una cuenta con ese correo";
+        $_SESSION['mensaje_sesion'] = "No existe una cuenta con ese correo";
+        $_SESSION['tipo_mensaje'] = "error";
+
+        header('Location: recuperar_contrasenia');
+        exit();
     }
+
+} else{
+    header('Location: login');
+    exit();
 }
 ?>

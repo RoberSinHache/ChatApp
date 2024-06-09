@@ -5,5 +5,5 @@ error_reporting(E_ALL);
 include './includes/common.php';
 
 session_destroy();
-header('Location: bienvenida');
+header('Location: login');
 exit();

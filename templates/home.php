@@ -72,6 +72,8 @@
         </div>
     </div>
 
-    <script src="js/scripts.js"></script>
+    <script src="js/cargar_informacion.js"></script>
+    <script src="js/envio_mensaje.js"></script>
+    <script src="js/modales.js"></script>
     <script src="js/detectar_archivo.js"></script>
 </div>
