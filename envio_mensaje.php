@@ -56,23 +56,23 @@ if ($archivo["size"] > 5000000) {
     $videos_permitidos = ["mp4", "avi", "mov", "wmv"];
     if ($subida_permitida) {
         if ($tipo_contenido == 'imagen' && !in_array($informacion_path, $imagenes_permitidas)) {
-            // Formato de imagen no permitido";
+            // Formato de imagen no permitido
             $subida_permitida = 0;
         }
         if ($tipo_contenido == 'video' && !in_array($informacion_path, $videos_permitidos)) {
-            // Formato de video no permitido";
+            // Formato de video no permitido
             $subida_permitida = 0;
         }
     }
 
     if ($subida_permitida == 0) {
-        // El archivo no pudo subirse";
+        // El archivo no pudo subirse
 
     } else {
         if (move_uploaded_file($archivo["tmp_name"], $ruta_archivo)) {
-            // El archivo". basename($archivo["name"]). " se ha guradado";
+            // El archivo". basename($archivo["name"]). " se ha guradado
         } else {
-            // El archivo no se ha guardado";
+            // El archivo no se ha guardado
         }
     }
 
@@ -80,13 +80,13 @@ if ($archivo["size"] > 5000000) {
     $ruta_archivo = $ruta_archivos . basename($archivo["name"]);
 
     if ($subida_permitida == 0) {
-        // El archivo no pudo subirse";
+        // El archivo no pudo subirse
 
     } else {
         if (move_uploaded_file($archivo["tmp_name"], $ruta_archivo)) {
-            // El archivo". basename($archivo["name"]). " se ha guradado";
+            // El archivo". basename($archivo["name"]). " se ha guradado
         } else {
-            // El archivo no se ha guardado";
+            // El archivo no se ha guardado
         }
     }
 }

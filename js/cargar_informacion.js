@@ -121,6 +121,9 @@ function mostrarMensajes(mensajes) {
         elementoMensaje.appendChild(contenidoMensaje);
         contenidoChat.appendChild(elementoMensaje);
     });
+
+    var ventanaChat = document.getElementById('contenido-chat');
+    ventanaChat.scrollTo({ top: ventanaChat.scrollHeight, behavior: 'smooth' });
 }
 
 

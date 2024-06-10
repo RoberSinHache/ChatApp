@@ -20,10 +20,10 @@
         </form>
     </div>
     <div class="ventana-chat">
-        <div class="encabezado-chat">
+        <div id="encabezado-chat" class="encabezado-chat">
             <!-- Encabezado del chat -->
         </div>
-        <div class="contenido-chat">
+        <div id="contenido-chat" class="contenido-chat">
             <!-- Mensajes del chat -->
         </div>
         
@@ -72,8 +72,8 @@
         </div>
     </div>
 
+    <script src="js/detectar_archivo.js"></script>
     <script src="js/cargar_informacion.js"></script>
     <script src="js/envio_mensaje.js"></script>
     <script src="js/modales.js"></script>
-    <script src="js/detectar_archivo.js"></script>
 </div>
