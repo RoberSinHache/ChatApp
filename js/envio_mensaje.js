@@ -47,10 +47,12 @@ function enviarMensaje(e) {
     }
 }
 
+/**
+ * Vacía todo el contenido que puedise tener el apartado
+ * para enviar un mensaje
+ */
 function vaciarMensaje() {
-    var contenido = document.getElementById('contenido');
+    document.getElementById('contenido').value = '';
     document.getElementById('tipo_contenido').value = 'texto';
     document.getElementById('archivo').value = '';
-
-    contenido.value = '';
 }
