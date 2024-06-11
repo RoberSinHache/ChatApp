@@ -50,6 +50,11 @@ body {
     border-radius: 20px;
 }
 
+.contenedor-seccion-usuarios,
+.contenedor-seccion-grupos{
+    height: 35%;
+}
+
 .seccion-chats-grupos h3 {
     margin: 0 0 10px;
     color: var(--color-fondo);
@@ -59,8 +64,9 @@ body {
 .seccion-grupos {
     padding: 10px;
     overflow-y: auto;
-    flex-grow: 1;
     user-select: none;
+    max-height: 80%;
+    border-radius: 20px;
 }
 
 .seccion-usuarios div,
@@ -78,6 +84,19 @@ body {
 .seccion-usuarios div:hover,
 .seccion-grupos div:hover {
     transform: scale(1.04);
+}
+
+.separador-izquierdo{
+    border: none;
+    border-top: 5px solid var(--color-fondo);
+    width: 50%;           
+    margin: 20px auto;
+    
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 260px;
+    border-radius: 10px;
 }
 
 #boton-agregar-usuario,
@@ -296,7 +315,6 @@ body {
     padding: 10px;
     background-color: transparent;
     cursor: pointer;
-    transition: transform 0.25s ease-in-out;
 
     display: flex;
     width: 25px; 
@@ -434,19 +452,36 @@ button:hover, input[type="submit"]:hover {
     width: 80%;
     max-width: 500px;
     border-radius: 10px;
+
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.boton-cerrar {
-    color: var(--color-danger);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.boton-cerrar-modal {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+
+    padding: 10px;
+    background-color: transparent;
     cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+
+    display: flex;
+    width: 40px; 
+    height: 40px; 
+    background-image: url('../subidos/iconos/icono-cerrar.png'); 
+    background-size: cover; 
+    transition: transform 0.2s ease;
 }
 
-.boton-cerrar:hover,
-.boton-cerrar:focus {
+.boton-cerrar-modal:hover,
+.boton-cerrar-modal:focus {
     color: var(--color-danger-hover);
+    transform: scale(1.2);
+    background-color: transparent;
+    
 }
 
 .mensaje-ok {

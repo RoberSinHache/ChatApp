@@ -61,14 +61,17 @@ document.getElementById('form-agregar-usuario').addEventListener('submit', funct
  * y la imagen que tendrá el mismo
  */
 document.getElementById('formulario-crear-grupo').addEventListener('submit', function(event) {
+    console.log('buenas')
     event.preventDefault();
     const datosFormulario = new FormData(document.getElementById('formulario-crear-grupo'));
+    console.log('estos son los datos: ' + datosFormulario);
     fetch('crear_grupo.php', {
         method: 'POST',
         body: datosFormulario
     })
     .then(response => response.json())
     .then(datos => {
+        console.log(datos);
         if (datos.status === 'success') {
             document.getElementById('crear-grupo-modal').style.display = 'none';
             cargarConversacionesYGrupos();
