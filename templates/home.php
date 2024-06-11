@@ -31,17 +31,24 @@
             <form id="datos-envio-form" enctype="multipart/form-data" action="envio_mensaje.php">
                 <input type="hidden" name="id_destinatario" id="id_destinatario" value="">
                 <input type="hidden" name="id_grupo" id="id_grupo" value="">
-                <input type="hidden" name="tipo_contenido" id="tipo_contenido" value="texto" hidden>
+                <input type="hidden" name="tipo_contenido" id="tipo_contenido" value="texto">
                 <textarea name="contenido" id="contenido" placeholder="Mensaje a enviar..."></textarea>
 
                 <label for="archivo" id="archivo-label">
                     <span id="archivo-icono-imagen" style="cursor: pointer;"><i class="icono-imagen"></i></span>
-                    <input type="file" id="archivo" name="archivo" accept="image/*, video/*"> 
+                    <input type="file" id="archivo" name="archivo" accept="*/*"> 
                 </label>
-                <button type="submit" id="enviar-btn"><i class="icono-enviar"></i></button>
 
+                <button type="submit" id="enviar-btn"><i class="icono-enviar"></i></button>
             </form>
+
+            <div id="previsualizacion-archivo" style="display: none;">
+                <p id="nombre-archivo"></p>
+                <div id="vista-previa"></div>
+                <button type="button" id="eliminar-archivo"></button>
+            </div>
         </div>
+
     </div>
 
 
@@ -72,7 +79,6 @@
         </div>
     </div>
 
-    <script src="js/detectar_archivo.js"></script>
     <script src="js/cargar_informacion.js"></script>
     <script src="js/envio_mensaje.js"></script>
     <script src="js/modales.js"></script>

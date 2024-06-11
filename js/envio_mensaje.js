@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('datos-envio-form').addEventListener('submit', enviarMensaje);
 });
 
+// LLama a la función enviar mensaje cuando el usuario pulsa enter sin el shift
+document.getElementById('contenido').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        enviarMensaje(event);
+    }
+});
+
 /**
  * Envía un mensaje.
  * Sólo lo hace en caso de que haya contenido, ya sea texto, algún archivo, o ambos.
@@ -21,22 +29,40 @@ document.addEventListener('DOMContentLoaded', function() {
 function enviarMensaje(e) {
     e.preventDefault();
     var datosEnvio = new FormData(document.getElementById('datos-envio-form'));
-    console.log(datosEnvio);
 
     if (datosEnvio.get('contenido').trim() !== '' || datosEnvio.get('archivo').size > 0) {
+        // Detectar el tipo de archivo antes de enviarlo
+        const archivo = datosEnvio.get('archivo');
+        const tipo_contenido = document.getElementById('tipo_contenido');
+        
+        if (archivo.size > 0) {
+            const mimeType = archivo.type;
+
+            if (mimeType.startsWith('image/')) {
+                tipo_contenido.value = 'imagen';
+
+            } else if (mimeType.startsWith('video/')) {
+                tipo_contenido.value = 'video';
+
+            } else {
+                tipo_contenido.value = 'archivo';
+            }
+        }
+
         fetch('envio_mensaje.php', {
             method: 'POST',
             body: datosEnvio
         })
         .then(response => response.json())
         .then(datos => {
-            if (datos.status === 'success') {
+            
+            if (datos.status === 'ok') {
                 const destinatario = datosEnvio.get('id_destinatario') || datosEnvio.get('id_grupo');
                 const tipo = datosEnvio.get('id_destinatario') ? 'usuario' : 'grupo';
 
                 cargarMensajes(destinatario, tipo);
                 vaciarMensaje();
-                
+                quitarPrevisualizacion();
             }
         });
 
@@ -47,6 +73,8 @@ function enviarMensaje(e) {
     }
 }
 
+
+
 /**
  * Vacía todo el contenido que puedise tener el apartado
  * para enviar un mensaje
@@ -56,3 +84,69 @@ function vaciarMensaje() {
     document.getElementById('tipo_contenido').value = 'texto';
     document.getElementById('archivo').value = '';
 }
+
+document.getElementById('archivo').addEventListener('change', function(event) {
+    const archivo = event.target.files[0];
+    if (archivo) {
+        const vistaPrevia = document.getElementById('vista-previa');
+        const nombreArchivo = document.getElementById('nombre-archivo');
+        const previsualizacionArchivo = document.getElementById('previsualizacion-archivo');
+        const tipoContenido = document.getElementById('tipo_contenido');
+
+        // Muestro el nombre del archivo
+        nombreArchivo.textContent = archivo.name;
+
+        // Limpio cualquier vista previa anterior
+        vistaPrevia.innerHTML = '';
+
+        // Creo la vista previa basada en el tipo de archivo
+        const mimeType = archivo.type;
+        if (mimeType.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(archivo);
+            vistaPrevia.appendChild(img);
+            tipoContenido.value = 'imagen';
+
+        } else if (mimeType.startsWith('video/')) {
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(archivo);
+            video.controls = true;
+            vistaPrevia.appendChild(video);
+            tipoContenido.value = 'video';
+
+        } else {
+            const imgArchivoDescargable = document.createElement('img');
+            imgArchivoDescargable.src = 'subidos/iconos/icono-carpeta.png';
+            imgArchivoDescargable.alt = 'Archivo descargable';
+            vistaPrevia.appendChild(imgArchivoDescargable);
+
+            tipoContenido.value = 'archivo';
+        }
+
+        // Muestro el contenedor de previsualización
+        previsualizacionArchivo.style.display = 'block';
+    }
+});
+
+document.getElementById('eliminar-archivo').addEventListener('click', function() {
+    quitarPrevisualizacion();
+});
+
+function quitarPrevisualizacion() {
+    const archivoInput = document.getElementById('archivo');
+    const previsualizacionArchivo = document.getElementById('previsualizacion-archivo');
+    const vistaPrevia = document.getElementById('vista-previa');
+    const nombreArchivo = document.getElementById('nombre-archivo');
+    const tipoContenido = document.getElementById('tipo_contenido');
+
+    // Limpio el input de archivo
+    archivoInput.value = '';
+    tipoContenido.value = 'texto';
+
+    // Oculto y limpio el contenedor de previsualización
+    previsualizacionArchivo.style.display = 'none';
+    vistaPrevia.innerHTML = '';
+    nombreArchivo.textContent = '';
+}
+
+

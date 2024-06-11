@@ -25,7 +25,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('../subidos/imagenes/FondoApp.jpg') no-repeat center center fixed; 
+    background: url('../subidos/app/FondoApp.jpg') no-repeat center center fixed; 
     background-size: cover;
 }
 
@@ -46,6 +46,8 @@ body {
     flex-direction: column;
     gap: 20px;
     overflow-y: auto;
+    margin: 20px;
+    border-radius: 20px;
 }
 
 .seccion-chats-grupos h3 {
@@ -64,9 +66,10 @@ body {
 .seccion-usuarios div,
 .seccion-grupos div {
     padding: 10px;
-    background-color: var(--color-fondo-terciario);
-    padding: 10px;
-    border-radius: 5px;
+    background-color: var(--color-texto);
+    color: var(--color-fondo);
+    padding: 10px 20px;
+    border-radius: 50px;
     cursor: pointer;
     margin-bottom: 20px;
     transition: transform 0.2s ease-in-out;
@@ -74,38 +77,64 @@ body {
 
 .seccion-usuarios div:hover,
 .seccion-grupos div:hover {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 #boton-agregar-usuario,
 #boton-crear-grupo{
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--color-texto);
+    color: var(--color-fondo);
+    cursor: pointer;
+    margin-top: 60px;
+    font-size: 1.1em;
+    width: 100%;
+    transition: transform 0.2s ease-in-out;
+    
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 90% !important;
 }
 
+#boton-agregar-usuario:hover,
+#boton-crear-grupo:hover{
+    transform: scale(1.04) translateX(-48%);
+}
+
 #boton-agregar-usuario{
-    bottom: 140px;
+    bottom: 190px;
 }
 
 #boton-crear-grupo{
-    bottom: 90px;
+    bottom: 120px;
 }
 
 .cerrar-sesion{
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 50px;
     background-color: var(--color-danger);
-    color: var(--color-texto);
+    color: var(--color-fondo);
+    cursor: pointer;
+    margin-top: 60px;
+    font-size: 1.1em;
+    width: 100%;
+    transition: transform 0.25s ease-in-out;
+
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 90% !important;
     bottom: 10px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
 }
 
 .cerrar-sesion:hover{
-    transform: scale(1.02), translateX(-50%);
+    transform: scale(1.04) translateX(-48%);
+    color: var(--color-texto);
     background-color: var(--color-danger-hover);
 }
 
@@ -157,19 +186,58 @@ body {
 }
 
 .mensaje .contenido img {
-    max-width: 300px;
-    border-radius: 5px;
+    max-width: 400px;
+    border-radius: 20px;
 }
 
 .mensaje .contenido video {
-    max-width: 600px;
-    border-radius: 5px;
+    max-width: 400px;
+    border-radius: 20px;
 }
 
+.contenedor-archivo-descargable {
+    background-color: var(--color-texto);
+    padding: 30px 50px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.contenedor-archivo-descargable p{
+    width: 100%;
+    border-bottom: solid 1px var(--color-fondo);
+    color: var(--color-fondo);
+    text-align: center;
+}
+
+.contenedor-archivo-descargable img {
+    width: 90px !important;
+}
+
+.contenedor-archivo-descargable a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--color-texto); 
+    color: var(--color-fondo);
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease; 
+}
+
+.contenedor-archivo-descargable a:hover {
+    background-color: rgb(222, 222, 222);
+}
+
+
 .contenido-chat{
+    border-radius: 20px;
     height: 90%;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Estilos para la entrada de chat */
@@ -180,23 +248,66 @@ body {
     width: 100%;
     height: 6vh;
     box-sizing: border-box;
-    bottom: 0;
     border-radius: 20px;
     position: absolute;
     left: 60%;
-    transform: translateX(-50%);
-    width: 78% !important;
-    bottom: 10px;
+    transform: translateX(-49%);
+    width: 76.5% !important;
+    bottom: 22px;
 
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--color-texto);
     box-sizing: border-box;
     font-size: 1.2em;
     color: var(--color-texto);
     outline: none;
     user-select: none;
-    border: none;
     backdrop-filter: blur(6px);
+}
+
+#previsualizacion-archivo{
+    display: flex;
+    background-color: var(--color-texto);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    bottom: 60px;
+    right: 0px;
+    border-radius: 20px 20px 0px 20px;
+    padding: 30px;
+    color: var(--color-fondo);
+}
+
+#previsualizacion-archivo img,
+#previsualizacion-archivo video {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 20px;
+}
+
+#nombre-archivo{
+    text-align: center;
+}
+
+#eliminar-archivo{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    padding: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+
+    display: flex;
+    width: 25px; 
+    height: 25px; 
+    background-image: url('../subidos/iconos/icono-cerrar.png'); 
+    background-size: cover; 
+    transition: transform 0.2s ease;
+}
+
+#eliminar-archivo:hover{
+    transform: scale(1.2);
 }
   
 #datos-envio-form {
@@ -210,7 +321,7 @@ body {
 
 #contenido {
     height: 25px;
-    width: 85%;
+    width: 90%;
     padding: 10px;
     background: transparent;
     border: none;
@@ -224,9 +335,17 @@ body {
 #archivo-label{
     display: flex;
     align-items: center;
-    width: 10%;
+    width: 5%;
     justify-content: space-evenly;
     margin: 0;
+}
+
+#archivo-icono-imagen{
+    transition: transform 0.2s ease;
+}
+
+#archivo-icono-imagen:hover{
+    transform: scale(1.1);
 }
 
 #enviar-btn {
@@ -238,7 +357,13 @@ body {
     margin: 0;
     padding: 0;
     background: transparent;
+    transition: transform 0.2s ease;
 }
+
+#enviar-btn:hover{
+    transform: scale(1.1);
+}
+
 
 .icono-imagen::before,
 .icono-enviar::before{
@@ -248,7 +373,7 @@ body {
 }
 
 .icono-imagen:before {
-    content: url('../subidos/iconos/icono-imagen.png'); 
+    content: url('../subidos/iconos/icono-archivo.png'); 
 }
 
 .icono-enviar:before {
@@ -266,7 +391,7 @@ body {
     display: flex;
     width: 50px; 
     height: 50px; 
-    background-image: url('../subidos/iconos/retroceso.png'); 
+    background-image: url('../subidos/iconos/icono-retroceso.png'); 
     background-size: cover; 
     transition: transform 0.2s ease;
 }

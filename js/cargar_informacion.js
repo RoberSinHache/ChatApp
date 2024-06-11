@@ -91,14 +91,18 @@ function mostrarMensajes(mensajes) {
         informacionMensaje.innerHTML = `
             <span class="nombre-remitente">${mensaje.nombre_remitente}</span>
             <span class="fecha-envio">${mensaje.fecha_envio}</span>
-            <div class="contenido-mensaje">${mensaje.contenido}</div>
         `;
-
 
         const contenidoMensaje = document.createElement('div');
         contenidoMensaje.className = 'contenido';
-        contenidoMensaje.textContent = mensaje.content;
 
+        // Agregar el contenido textual del mensaje
+        const textoMensaje = document.createElement('div');
+        textoMensaje.className = 'contenido-mensaje';
+        textoMensaje.textContent = mensaje.contenido;
+        contenidoMensaje.appendChild(textoMensaje);
+
+        // Agregar el archivo si existe
         if (mensaje.tipo_contenido === 'imagen') {
             const elementoImagen = document.createElement('img');
             elementoImagen.src = mensaje.ruta_archivo;
@@ -111,10 +115,26 @@ function mostrarMensajes(mensajes) {
             contenidoMensaje.appendChild(elementoVideo);
 
         } else if (mensaje.tipo_contenido === 'archivo') {
+            const contenedorArchivo = document.createElement('div');
+            contenedorArchivo.className = 'contenedor-archivo-descargable';
+            
+            const nombreArchivo = document.createElement('p');
+            nombreArchivo.textContent = mensaje.nombre_archivo;
+            contenedorArchivo.appendChild(nombreArchivo);
+
+            const imgArchivo = document.createElement('img');
+            imgArchivo.src = 'subidos/iconos/icono-carpeta.png';
+            imgArchivo.alt = 'Descargar';
+            contenedorArchivo.appendChild(imgArchivo);
+
             const elementoArchivo = document.createElement('a');
             elementoArchivo.href = mensaje.ruta_archivo;
-            elementoArchivo.textContent = `Download ${mensaje.nombre_archivo}`;
-            contenidoMensaje.appendChild(elementoArchivo);
+            elementoArchivo.textContent = `Descargar`;
+            elementoArchivo.setAttribute('download', ''); // Esto hace que se descargue.
+            contenedorArchivo.appendChild(elementoArchivo);
+
+            contenidoMensaje.appendChild(contenedorArchivo);
+
         }
 
         elementoMensaje.appendChild(informacionMensaje);
@@ -122,11 +142,15 @@ function mostrarMensajes(mensajes) {
         contenidoChat.appendChild(elementoMensaje);
     });
 
+    // Scrolleo la ventana hasta abajo para que se vea el último mensaje
     setTimeout(() => {
         var ventanaChat = document.getElementById('contenido-chat');
         ventanaChat.scrollTo({ top: ventanaChat.scrollHeight, behavior: 'smooth' });
     }, 500);
 }
+
+
+
 
 
 

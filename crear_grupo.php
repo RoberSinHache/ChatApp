@@ -1,14 +1,11 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include './includes/common.php';
 
 echo var_dump($_FILES['icono-grupo']);
 
 $nombre_grupo = $_POST['nombre-grupo'];
 $icono_grupo = $_FILES['icono-grupo'];
+//$id_usuario = $_SESSION['id_usuario'];
 $id_usuario = $_SESSION['id_usuario'];
 
 
