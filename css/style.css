@@ -319,7 +319,7 @@ body {
     display: flex;
     width: 25px; 
     height: 25px; 
-    background-image: url('../subidos/iconos/icono-cerrar.png'); 
+    background-image: url('../subidos/app/iconos/icono-cerrar.png'); 
     background-size: cover; 
     transition: transform 0.2s ease;
 }
@@ -391,11 +391,11 @@ body {
 }
 
 .icono-imagen:before {
-    content: url('../subidos/iconos/icono-archivo.png'); 
+    content: url('../subidos/app/iconos/icono-archivo.png'); 
 }
 
 .icono-enviar:before {
-    content: url('../subidos/iconos/icono-enviar.png');
+    content: url('../subidos/app/iconos/icono-enviar.png');
 }
 
 .contenedor-enlace{
@@ -409,7 +409,7 @@ body {
     display: flex;
     width: 50px; 
     height: 50px; 
-    background-image: url('../subidos/iconos/icono-retroceso.png'); 
+    background-image: url('../subidos/app/iconos/icono-retroceso.png'); 
     background-size: cover; 
     transition: transform 0.2s ease;
 }
@@ -471,7 +471,7 @@ button:hover, input[type="submit"]:hover {
     display: flex;
     width: 40px; 
     height: 40px; 
-    background-image: url('../subidos/iconos/icono-cerrar.png'); 
+    background-image: url('../subidos/app/iconos/icono-cerrar.png'); 
     background-size: cover; 
     transition: transform 0.2s ease;
 }
