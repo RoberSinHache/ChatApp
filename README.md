@@ -2,80 +2,74 @@
 
 ## Instalación de XAMPP
 
-Windows
+### Windows
 
 1. Descargar XAMPP:
-   - Acceder a la página oficial de XAMPP https://www.apachefriends.org/index.html 
-     y descargar el instalador para Windows.
+   - Acceder a la página oficial de XAMPP [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html) y descargar el instalador para Windows.
 
 2. Instalar XAMPP:
-   - Ejecutar el instalador descargado y seguir las instrucciones del asistente de 
-     instalación.
-   - Seleccionar los componentes necesarios (Apache, MySQL, PHP, y 
-     phpMyAdmin).
+   - Ejecutar el instalador descargado y seguir las instrucciones del asistente de instalación.
+   - Seleccionar los componentes necesarios (Apache, MySQL, PHP, y phpMyAdmin).
    - Completar la instalación siguiendo los pasos del instalador.
 
-Linux
+### Linux
 
 1. Descargar XAMPP:
-   - Acceder a la página oficial de XAMPP https://www.apachefriends.org/index.html y 
-     descargar el archivo .run para Linux.
+   - Acceder a la página oficial de XAMPP [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html) y descargar el archivo `.run` para Linux.
 
 2. Instalar XAMPP:
    - Abrir una terminal y navegar al directorio donde descargaste el archivo.
    - Editar el archivo para que sea ejecutable y abrir el instalador:
- 	
-chmod +x xampp-linux-x64-<version>.run
+     ```sh
+     chmod +x xampp-linux-x64-<version>.run
+     sudo ./xampp-linux-x64-<version>.run
+     ```
+   - Seguir las instrucciones del asistente de instalación.
 
-
-sudo ./xampp-linux-x64-<version>.run
-
-
-    - Seguir las instrucciones del asistente de instalación.
-
-
-macOS
+### macOS
 
 1. Descargar XAMPP:
-   - Acceder a la página oficial de XAMPP https://www.apachefriends.org/index.html y 
-     descargar el instalador para macOS.
+   - Acceder a la página oficial de XAMPP [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html) y descargar el instalador para macOS.
 
 2. Instalar XAMPP:
-   - Ejecutar el archivo .dmg descargado y arrastrar XAMPP a la carpeta de 
-     aplicaciones.
-   - Abrir XAMPP desde la carpeta de aplicaciones y seguir las instrucciones del 
-     asistente de instalación.
-
+   - Ejecutar el archivo `.dmg` descargado y arrastrar XAMPP a la carpeta de aplicaciones.
+   - Abrir XAMPP desde la carpeta de aplicaciones y seguir las instrucciones del asistente de instalación.
 
 ## Configuración de XAMPP
 
 1. Iniciar XAMPP:
-   - Abrir el Panel de Control de XAMPP y arrancar los servicios de Apache y 
-     MySQL.
+   - Abrir el Panel de Control de XAMPP y arrancar los servicios de Apache y MySQL.
 
-2. Configurar el archivo hosts:
-   - Windows:
- 	- Abrir C:\Windows\System32\drivers\etc\hosts con un editor de texto como 
-  administrador.
-   - Linux y macOS:
- 	- Editar el archivo /etc/hosts usando un editor de texto con privilegios de 
-  superusuario.
- 
-sudo nano /etc/hosts
-
-	 
-
+2. Configurar el archivo `hosts`:
+   - **Windows:**
+     - Abrir `C:\Windows\System32\drivers\etc\hosts` con un editor de texto como administrador.
+   - **Linux y macOS:**
+     - Editar el archivo `/etc/hosts` usando un editor de texto con privilegios de superusuario:
+       ```sh
+       sudo nano /etc/hosts
+       ```
    - Añadir la siguiente línea al final del archivo para mapear el dominio a localhost:
+     ```
+     127.0.0.1    chatapp.local
+     ```
 
- 127.0.0.1	chatapp.local
-
-
-3. Configurar el archivo httpd-vhosts.conf:
+3. Configurar el archivo `httpd-vhosts.conf`:
    - Abrir el archivo de configuración de virtual hosts en XAMPP:
- 	- Windows: C:\xampp\apache\conf\extra\httpd-vhosts.conf
- 	- Linux y macOS: /opt/lampp/etc/extra/httpd-vhosts.conf
-
+     - **Windows:** `C:\xampp\apache\conf\extra\httpd-vhosts.conf`
+     - **Linux y macOS:** `/opt/lampp/etc/extra/httpd-vhosts.conf`
    - Añadir la siguiente configuración para crear un virtual host:
+     ```apache
+     <VirtualHost *:80>
+         DocumentRoot "/opt/lampp/htdocs/ChatApp"
+         ServerName chatapp.local
+         <Directory "/opt/lampp/htdocs/ChatApp">
+             Options Indexes FollowSymLinks
+             AllowOverride All
+             Require all granted
+         </Directory>
+     </VirtualHost>
+     ```
+
  	
 ### Windows:
 
