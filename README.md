@@ -108,7 +108,7 @@
 ## Configuración del Proyecto
 
 1. Descargar y Descomprimir el Proyecto:
-   - Colocar los archivos del proyecto en el directorio `htdocs` de XAMPP.
+   - Colocar el archivo raíz del proyecto en el directorio `htdocs` de XAMPP.
      - Windows: `C:\xampp\htdocs\ChatApp`
      - Linux y macOS: `/opt/lampp/htdocs/ChatApp`
 
