@@ -10,6 +10,7 @@ document.getElementById('boton-agregar-usuario').addEventListener('click', funct
 
 document.getElementById('cerrar-agregar-usuario-modal').addEventListener('click', function() {
     document.getElementById('agregar-usuario-modal').style.display = 'none';
+    document.getElementById('nombre-agregar-usuario').value = '';
 });
 
 document.getElementById('boton-crear-grupo').addEventListener('click', function() {
@@ -18,6 +19,8 @@ document.getElementById('boton-crear-grupo').addEventListener('click', function(
 
 document.getElementById('cerrar-crear-grupo-modal').addEventListener('click', function() {
     document.getElementById('crear-grupo-modal').style.display = 'none';
+    document.getElementById('nombre-grupo').value = '';
+    document.getElementById('icono-grupo').value = '';
 });
 
 
@@ -46,12 +49,25 @@ document.getElementById('form-agregar-usuario').addEventListener('submit', funct
         if (response.status === 'ok') {
             document.getElementById('agregar-usuario-modal').style.display = 'none';
             cargarConversacionesYGrupos();
-        } else {
 
+        } else {
+            const mensajeError = document.getElementById('mensaje-error-individual');
+            mensajeError.style.display = 'block';
+            mensajeError.textContent = 'El usuario no existe';
+            setTimeout(() => {
+                mensajeError.style.display = 'none';
+            }, 4000);
         }
     })
     .catch(error => {
         console.error('No se pudo agregar al usuario', error);
+
+        const mensajeError = document.getElementById('mensaje-error-individual');
+        mensajeError.style.display = 'block';
+        mensajeError.textContent = 'El usuario no existe';
+        setTimeout(() => {
+            mensajeError.style.display = 'none';
+        }, 4000);
     });
 });
 
@@ -76,7 +92,9 @@ document.getElementById('formulario-crear-grupo').addEventListener('submit', fun
             document.getElementById('icono-grupo').value = '';
             document.getElementById('crear-grupo-modal').style.display = 'none';
 
-            cargarConversacionesYGrupos();
+            setTimeout(function() {
+                location.reload();
+            }, 400);
 
         } else {
             console.error('Error al crear el grupo:', datos.message);

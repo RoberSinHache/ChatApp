@@ -28,10 +28,15 @@ document.getElementById('contenido').addEventListener('keypress', function(event
 function enviarMensaje(event) {
     event.preventDefault();
     var datosEnvio = new FormData(document.getElementById('datos-envio-form'));
+    console.log(datosEnvio);
 
     if (datosEnvio.get('contenido').trim() !== '' || datosEnvio.get('archivo').size > 0) {
         const archivo = datosEnvio.get('archivo');
         const tipo_contenido = document.getElementById('tipo_contenido');
+
+        console.log(archivo);
+        console.log(tipo_contenido);
+        console.log(datosEnvio.get('archivo'));
 
         if (archivo.size > 0) {
             const mimeType = archivo.type;
@@ -39,13 +44,15 @@ function enviarMensaje(event) {
             if (mimeType.startsWith('image/')) {
                 tipo_contenido.value = 'imagen';
 
-            } else if (mimeType.startsWith('video')) {
+            } else if (mimeType.startsWith('video/')) {
                 tipo_contenido.value = 'video';
                 
             } else {
                 tipo_contenido.value = 'archivo';
             }
         }
+
+        console.log(tipo_contenido.value);
 
         fetch('envio_mensaje.php', {
             method: 'POST',
@@ -115,7 +122,7 @@ document.getElementById('archivo').addEventListener('change', function(event) {
 
         } else {
             const imgArchivoDescargable = document.createElement('img');
-            imgArchivoDescargable.src = 'subidos/iconos/icono-carpeta.png';
+            imgArchivoDescargable.src = 'subidos/app/iconos/icono-carpeta.png';
             imgArchivoDescargable.alt = 'Archivo descargable';
             vistaPrevia.appendChild(imgArchivoDescargable);
 

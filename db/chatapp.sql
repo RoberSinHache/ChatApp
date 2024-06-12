@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2024 at 01:59 AM
+-- Generation Time: Jun 12, 2024 at 05:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -101,10 +101,18 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contraseña` varchar(255) NOT NULL,
-  `imagen_perfil` varchar(255) NOT NULL DEFAULT '''porDefecto.png''',
+  `imagen_perfil` varchar(255) NOT NULL DEFAULT 'subidos/app/iconos/icono-usuario.png',
   `token` varchar(255) DEFAULT NULL,
   `activo` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `imagen_perfil`, `token`, `activo`) VALUES
+(23, 'Usuario B', 'b@b.com', '$2y$10$RkV6ZPb5O9xxGTja.oIUQ.KTs5U7lWDR/Vh4xO1WLDCSTOL5SJJDO', 'subidos/app/iconos/icono-usuario.png', NULL, 1),
+(24, 'Usuario A', 'a@a.com', '$2y$10$oIszUYWexDOj52eeLGtRt.JMKBc2kxQe8eLWRH.uEXq9spw6h0g1K', 'subidos/app/iconos/icono-usuario.png', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -165,37 +173,37 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- AUTO_INCREMENT for table `mensajes_privados`
 --
 ALTER TABLE `mensajes_privados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `miembros_grupos`
 --
 ALTER TABLE `miembros_grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `reseteo_contraseñas`
 --
 ALTER TABLE `reseteo_contraseñas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables

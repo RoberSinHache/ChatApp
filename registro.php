@@ -58,7 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $mail->addAddress($email);
             $mail->Subject = 'Sólo un paso más';
-            $mail->Body    = "<h3>Bienvenido a ChatApp $nombre</h3><br>Clica en el siguiente enlace para completar el registro: <a href='http://chatapp.local/index.php?pagina=verificacion&token=$token'>Finalizar registro</a>";
+            $mail->Body = "<div style='font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; padding: 30px; border-radius: 10px;'>
+                                <h2 style='color: #333; text-align: center; margin-bottom: 20px;'>¡Bienvenido a ChatApp, $nombre!</h2>
+                                <p style='color: #666; text-align: center; margin-bottom: 30px;'>Haz clic en el siguiente enlace para completar tu registro:</p>
+                                <div style='text-align: center;'>
+                                    <a href='http://chatapp.local/index.php?pagina=verificacion&token=$token' style='background-color: #007bff; color: #fff; text-decoration: none; padding: 15px 30px; border-radius: 30px; display: inline-block; transition: background-color 0.3s;'>Finalizar registro</a>
+                                </div>
+                            </div>";
+
 
             $mail->send();
 

@@ -8,7 +8,7 @@ include './includes/common.php';
 $nombre_grupo = isset($_POST['nombre-grupo']) ? $_POST['nombre-grupo'] : null;
 $icono_grupo = isset($_FILES['icono-grupo']) ? $_FILES['icono-grupo'] : null;
 $id_usuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : null;
-$archivo_objetivo = 'subidos/grupos/porDefecto.png';
+$archivo_objetivo = 'subidos/app/iconos/porDefecto.png';
 
 if ($nombre_grupo === null || $id_usuario === null) {
     echo json_encode(['status' => 'error', 'message' => 'Faltan datos', 'post' => $_POST, 'files' => $_FILES]);

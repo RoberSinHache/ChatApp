@@ -2,7 +2,6 @@
 error_reporting(E_ERROR | E_PARSE);
 
 include './includes/common.php';
-setlocale(LC_ALL, 'en_US.UTF-8');
 
 $id_remitente = $_SESSION['id_usuario'];
 $id_destinatario = isset($_POST['id_destinatario']) ? $_POST['id_destinatario'] : null;

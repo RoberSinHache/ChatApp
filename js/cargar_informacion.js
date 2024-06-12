@@ -34,6 +34,8 @@ function mostrarListaChats(datos) {
 
     datos.usuarios.forEach(usuario => {
         const elementoUsuario = document.createElement('div');
+        elementoUsuario.classList.add('usuario');
+
         const imagenUsuario = document.createElement('img');
         imagenUsuario.src = usuario.imagen_perfil;
         imagenUsuario.alt = `Imagen de perfil de ${usuario.nombre}`;
@@ -50,6 +52,9 @@ function mostrarListaChats(datos) {
 
     datos.grupos.forEach(grupo => {
         const elementoGrupo = document.createElement('div');
+        elementoGrupo.classList.add('grupo');
+        elementoGrupo.dataset.idGrupo = grupo.id;
+
         const iconoGrupo = document.createElement('img');
         iconoGrupo.src = grupo.icono;
         iconoGrupo.alt = `Icono de ${grupo.nombre}`;
@@ -187,7 +192,7 @@ function mostrarMensajes(mensajes) {
             contenedorArchivo.appendChild(nombreArchivo);
 
             const imgArchivo = document.createElement('img');
-            imgArchivo.src = 'subidos/iconos/icono-carpeta.png';
+            imgArchivo.src = 'subidos/app/iconos/icono-carpeta.png';
             imgArchivo.alt = 'Descargar';
             contenedorArchivo.appendChild(imgArchivo);
 

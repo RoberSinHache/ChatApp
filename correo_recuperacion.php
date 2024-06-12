@@ -24,7 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $mail->addAddress($email);
             $mail->Subject = htmlspecialchars('Cambia tu contraseña');
-            $mail->Body    = "Clica en el siguiente enlace para establecer una nueva: <a href='http://chatapp.local/index.php?pagina=nueva_contrasenia&token=$token'>Cambiar contraseña</a>";
+            $mail->Body = "<div style='font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; padding: 30px; border-radius: 10px;'>
+                                <h2 style='color: #333; text-align: center; margin-bottom: 20px;'>Cambia tu contraseña</h2>
+                                <p style='color: #666; text-align: center; margin-bottom: 30px;'>Haz clic en el siguiente enlace para establecer una nueva:</p>
+                                <div style='text-align: center;'>
+                                    <a href='http://chatapp.local/index.php?pagina=nueva_contrasenia&token=$token' style='background-color: #007bff; color: #fff; text-decoration: none; padding: 15px 30px; border-radius: 30px; display: inline-block; transition: background-color 0.3s;'>Cambiar contraseña</a>
+                                </div>
+                            </div>";
+
+
 
             if($mail->send()) {
                 $_SESSION['mensaje_sesion'] = "Se ha enviado un correo para que puedas cambiar tu contraseña. Revisa tu bandeja de entrada";

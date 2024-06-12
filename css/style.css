@@ -53,6 +53,7 @@ body {
 .contenedor-seccion-usuarios,
 .contenedor-seccion-grupos{
     height: 35%;
+    text-align: center;
 }
 
 .seccion-chats-grupos h3 {
@@ -294,14 +295,11 @@ body {
     display: none;
     padding: 10px 20px;
     align-items: center;
-    width: 100%;
     height: 6vh;
-    box-sizing: border-box;
-    border-radius: 20px;
     position: absolute;
     left: 60%;
     transform: translateX(-49%);
-    width: 76.5% !important;
+    width: 76.5%;
     bottom: 22px;
 
     border-radius: 10px;
@@ -313,6 +311,95 @@ body {
     user-select: none;
     backdrop-filter: blur(6px);
 }
+
+#seccion-usuarios-grupo{
+    width: 15%;
+    background-color: var(--color-fondo-secundario);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    margin: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.usuario-grupo{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.usuario-grupo img{
+    margin-left: 10px;
+}
+
+.usuario-grupo button{
+    margin-left: auto;
+    background-color: var(--color-danger);
+    border-radius: 50px;
+    padding: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.usuario-grupo button:hover{
+    color: var(--color-texto);
+    background-color: var(--color-danger-hover);
+}
+
+
+#boton-agregar-usuario-grupo{
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--color-texto);
+    color: var(--color-fondo);
+    cursor: pointer;
+    margin-top: 60px;
+    font-size: 1.1em;
+    width: 100%;
+    transition: transform 0.25s ease-in-out;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90% !important;
+    bottom: 75px;
+    transition: transform 0.2s;
+}
+
+#boton-agregar-usuario-grupo:hover{
+    transform: scale(1.04) translateX(-48%);
+}
+
+#abandonar-grupo-btn{
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--color-danger);
+    color: var(--color-fondo);
+    cursor: pointer;
+    margin-top: 60px;
+    font-size: 1.1em;
+    width: 100%;
+    transition: transform 0.25s ease-in-out;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90% !important;
+    bottom: 10px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+#abandonar-grupo-btn:hover{
+    transform: scale(1.04) translateX(-48%);
+    color: var(--color-texto);
+    background-color: var(--color-danger-hover);
+}
+
 
 #previsualizacion-archivo{
     display: flex;

@@ -70,10 +70,12 @@
                     <input type="text" id="nombre-usuario-agregar-grupo" name="nombre-usuario-agregar-grupo" placeholder='Nombre de usuario' required>
                     <input type="submit" value='Agregar'>
                 </form>
+                <div id="mensaje-error" style="color: red;"></div>
             </div>
         </div>
     </div>
 
+    <!-- Modal para agregar un usuario de manera individual -->
     <div id="agregar-usuario-modal" class="modal">
         <div class="contenedor-formulario-previo" style='width: 100%; text-align: center;'>
             <div class="contenido-modal">
@@ -83,10 +85,12 @@
                     <input type="text" id="nombre-agregar-usuario" name="nombre-agregar-usuario" placeholder='Nombre de usuario' required>
                     <input type="submit" value='Agregar'>
                 </form>
+                <div id="mensaje-error-individual" style="color: red;"></div>
             </div>
         </div>
     </div>
 
+    <!-- Modal para crear un grupo -->
     <div id="crear-grupo-modal" class="modal">
         <div class="contenedor-formulario-previo" style='width: 100%; text-align: center;'>
             <div class="contenido-modal">
@@ -105,5 +109,5 @@
     <script src="js/cargar_informacion.js"></script>
     <script src="js/envio_mensaje.js"></script>
     <script src="js/modales.js"></script>
-    <script src="js/grupo_usuarios.js"></script> <!-- Nuevo archivo para manejar la lógica del grupo -->
+    <script src="js/grupo_usuarios.js"></script>
 </div>
