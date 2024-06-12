@@ -1,24 +1,26 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 include './includes/common.php';
 
 $nombre_grupo = isset($_POST['nombre-grupo']) ? $_POST['nombre-grupo'] : null;
 $icono_grupo = isset($_FILES['icono-grupo']) ? $_FILES['icono-grupo'] : null;
-$id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null;
+$id_usuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : null;
 $archivo_objetivo = 'subidos/grupos/porDefecto.png';
 
 if ($nombre_grupo === null || $id_usuario === null) {
-    echo json_encode(['status' => 'error', 'message' => 'Datos faltantes', 'post' => $_POST, 'files' => $_FILES]);
+    echo json_encode(['status' => 'error', 'message' => 'Faltan datos', 'post' => $_POST, 'files' => $_FILES]);
     exit;
 }
 
-if ($icono_grupo) {
+if ($icono_grupo && !empty($icono_grupo['name'])) {
     $directorio_objetivo = "subidos/grupos/";
     $archivo_objetivo = $directorio_objetivo . basename($icono_grupo["name"]);
 
     if (!move_uploaded_file($icono_grupo["tmp_name"], $archivo_objetivo)) {
-        echo json_encode(['status' => 'error', 'message' => 'Error al subir el archivo']);
+        echo json_encode(['status' => 'error', 'message' => 'Error al subir el archivo', 'files' => $icono_grupo]);
         exit;
     }
 }
@@ -43,7 +45,7 @@ try {
 
     $pdo->commit();
 
-    echo json_encode(['status' => 'success']);
+    echo json_encode(['status' => 'ok']);
 
 } catch (Exception $e) {
     $pdo->rollBack();

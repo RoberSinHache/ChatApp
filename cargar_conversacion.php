@@ -26,7 +26,7 @@ if ($tipo == 'usuario') {
                            JOIN usuarios u ON m.id_remitente = u.id
                            WHERE m.id_grupo = ?
                            ORDER BY m.fecha_envio');
-    $stmt->execute([$chat]);
+    $stmt->execute([$destinatario]);
 }
 
 $mensajes = $stmt->fetchAll();

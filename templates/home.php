@@ -35,14 +35,13 @@
                 <input type="hidden" name="id_grupo" id="id_grupo" value="">
                 <input type="hidden" name="tipo_contenido" id="tipo_contenido" value="texto">
                 <textarea name="contenido" id="contenido" placeholder="Mensaje a enviar..."></textarea>
-
                 <label for="archivo" id="archivo-label">
                     <span id="archivo-icono-imagen" style="cursor: pointer;"><i class="icono-imagen"></i></span>
                     <input type="file" id="archivo" name="archivo" accept="*/*"> 
                 </label>
-
                 <button type="submit" id="enviar-btn"><i class="icono-enviar"></i></button>
             </form>
+
 
             <div id="previsualizacion-archivo" style="display: none;">
                 <p id="nombre-archivo"></p>

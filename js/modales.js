@@ -43,7 +43,7 @@ document.getElementById('form-agregar-usuario').addEventListener('submit', funct
         return response.json();
     })
     .then(response => {
-        if (response.status === 'success') {
+        if (response.status === 'ok') {
             document.getElementById('agregar-usuario-modal').style.display = 'none';
             cargarConversacionesYGrupos();
         } else {
@@ -61,10 +61,9 @@ document.getElementById('form-agregar-usuario').addEventListener('submit', funct
  * y la imagen que tendrá el mismo
  */
 document.getElementById('formulario-crear-grupo').addEventListener('submit', function(event) {
-    console.log('buenas')
     event.preventDefault();
     const datosFormulario = new FormData(document.getElementById('formulario-crear-grupo'));
-    console.log('estos son los datos: ' + datosFormulario);
+    
     fetch('crear_grupo.php', {
         method: 'POST',
         body: datosFormulario
@@ -72,11 +71,18 @@ document.getElementById('formulario-crear-grupo').addEventListener('submit', fun
     .then(response => response.json())
     .then(datos => {
         console.log(datos);
-        if (datos.status === 'success') {
+        if (datos.status === 'ok') {
+            document.getElementById('nombre-grupo').value = '';
+            document.getElementById('icono-grupo').value = '';
             document.getElementById('crear-grupo-modal').style.display = 'none';
-            cargarConversacionesYGrupos();
-        } else {
 
+            cargarConversacionesYGrupos();
+
+        } else {
+            console.error('Error al crear el grupo:', datos.message);
         }
+    })
+    .catch(error => {
+        console.error('No se pudo crear el grupo', error);
     });
 });

@@ -22,7 +22,7 @@ $usuario_objetivo = $consulta->fetch();
 if ($usuario_objetivo) {
     $consulta = $pdo->prepare("INSERT INTO mensajes_privados (id_usuario_1, id_usuario_2) VALUES (?, ?)");
     $consulta->execute([$id_usuario, $usuario_objetivo['id']]);
-    echo json_encode(['status' => 'success']);
+    echo json_encode(['status' => 'ok']);
 
 } else {
     echo json_encode(['status' => 'error', 'mensaje' => 'El usuario no existe']);

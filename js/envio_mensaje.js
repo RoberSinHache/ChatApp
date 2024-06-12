@@ -24,26 +24,24 @@ document.getElementById('contenido').addEventListener('keypress', function(event
  * al que se llama antes en el home.php) para que se actualize la interfaz y se vea el mensaje nuevo. 
  * Al final baja hasta abajo de la conversación para que se pueda ver el último mensaje.
  * 
- * @param {Event} e : El evento que llama a esta función 
  */
-function enviarMensaje(e) {
-    e.preventDefault();
+function enviarMensaje(event) {
+    event.preventDefault();
     var datosEnvio = new FormData(document.getElementById('datos-envio-form'));
 
     if (datosEnvio.get('contenido').trim() !== '' || datosEnvio.get('archivo').size > 0) {
-        // Detectar el tipo de archivo antes de enviarlo
         const archivo = datosEnvio.get('archivo');
         const tipo_contenido = document.getElementById('tipo_contenido');
-        
+
         if (archivo.size > 0) {
             const mimeType = archivo.type;
 
             if (mimeType.startsWith('image/')) {
                 tipo_contenido.value = 'imagen';
 
-            } else if (mimeType.startsWith('video/')) {
+            } else if (mimeType.startsWith('video')) {
                 tipo_contenido.value = 'video';
-
+                
             } else {
                 tipo_contenido.value = 'archivo';
             }
@@ -55,7 +53,7 @@ function enviarMensaje(e) {
         })
         .then(response => response.json())
         .then(datos => {
-            
+            console.log(datos);
             if (datos.status === 'ok') {
                 const destinatario = datosEnvio.get('id_destinatario') || datosEnvio.get('id_grupo');
                 const tipo = datosEnvio.get('id_destinatario') ? 'usuario' : 'grupo';
@@ -64,7 +62,8 @@ function enviarMensaje(e) {
                 vaciarMensaje();
                 quitarPrevisualizacion();
             }
-        });
+        })
+        .catch(error => console.error('Error enviando el mensaje:', error));
 
         var ventanaChat = document.getElementById('contenido-chat');
         setTimeout(() => {
@@ -72,6 +71,9 @@ function enviarMensaje(e) {
         }, 500);
     }
 }
+
+
+
 
 
 
@@ -93,13 +95,10 @@ document.getElementById('archivo').addEventListener('change', function(event) {
         const previsualizacionArchivo = document.getElementById('previsualizacion-archivo');
         const tipoContenido = document.getElementById('tipo_contenido');
 
-        // Muestro el nombre del archivo
         nombreArchivo.textContent = archivo.name;
 
-        // Limpio cualquier vista previa anterior
         vistaPrevia.innerHTML = '';
 
-        // Creo la vista previa basada en el tipo de archivo
         const mimeType = archivo.type;
         if (mimeType.startsWith('image/')) {
             const img = document.createElement('img');

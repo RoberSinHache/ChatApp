@@ -34,18 +34,38 @@ function mostrarListaChats(datos) {
 
     datos.usuarios.forEach(usuario => {
         const elementoUsuario = document.createElement('div');
-        elementoUsuario.textContent = usuario.nombre;
-        elementoUsuario.addEventListener('click', () => cargarMensajes(usuario.id, 'usuario'));
+        const imagenUsuario = document.createElement('img');
+        imagenUsuario.src = usuario.imagen_perfil;
+        imagenUsuario.alt = `Imagen de perfil de ${usuario.nombre}`;
+        imagenUsuario.classList.add('imagen-usuario'); 
+        elementoUsuario.appendChild(imagenUsuario);
+        
+        const nombreUsuario = document.createElement('span');
+        nombreUsuario.textContent = usuario.nombre;
+        elementoUsuario.appendChild(nombreUsuario);
+        
+        elementoUsuario.addEventListener('click', () => cargarMensajes(usuario.id, 'usuario', usuario));
         seccionUsuarios.appendChild(elementoUsuario);
     });
 
     datos.grupos.forEach(grupo => {
         const elementoGrupo = document.createElement('div');
-        elementoGrupo.textContent = grupo.nombre;
-        elementoGrupo.addEventListener('click', () => cargarMensajes(grupo.id, 'grupo'));
+        const iconoGrupo = document.createElement('img');
+        iconoGrupo.src = grupo.icono;
+        iconoGrupo.alt = `Icono de ${grupo.nombre}`;
+        iconoGrupo.classList.add('icono-grupo'); 
+        elementoGrupo.appendChild(iconoGrupo);
+        
+        const nombreGrupo = document.createElement('span');
+        nombreGrupo.textContent = grupo.nombre;
+        elementoGrupo.appendChild(nombreGrupo);
+        
+        elementoGrupo.addEventListener('click', () => cargarMensajes(grupo.id, 'grupo', grupo));
         seccionGrupos.appendChild(elementoGrupo);
     });
 }
+
+
 
 /**
  * Llama a la función php a través de get para traer un json 
@@ -57,16 +77,64 @@ function mostrarListaChats(datos) {
  * @param {Integer} destinatario : El id del usuario o grupo que se ha clicado 
  * @param {String} tipo : Puede ser 'usuario' o 'grupo'
  */
-const campoIdDestinatario = document.getElementById('id_destinatario');
-function cargarMensajes(destinatario, tipo) {
+var campoIdDestinatario = document.getElementById('id_destinatario');
+var campoIdGrupo = document.getElementById('id_grupo');
+
+function cargarMensajes(destinatario, tipo, info) {
+    console.log(destinatario);
+    console.log(tipo);
+
     fetch(`cargar_conversacion.php?destinatario=${destinatario}&tipo=${tipo}`)
         .then(response => response.json())
         .then(mensajes => {
-            campoIdDestinatario.value = destinatario;
+            console.log(mensajes);
+            if (tipo === 'usuario') {
+                campoIdDestinatario.value = destinatario;
+                campoIdGrupo.value = ''; 
+
+            } else {
+                campoIdGrupo.value = destinatario;
+                campoIdDestinatario.value = ''; 
+            }
+
+            if (info) {
+                mostrarEncabezado(tipo, info);                
+            }
+
             mostrarMensajes(mensajes);
         })
         .catch(error => console.error('Ocurrió un error cargando los mensajes', error)
     );
+}
+
+function mostrarEncabezado(tipo, info) {
+    const encabezadoChat = document.getElementById('encabezado-chat');
+    encabezadoChat.innerHTML = '';
+
+    if (tipo === 'usuario') {
+        const imagenUsuario = document.createElement('img');
+        imagenUsuario.src = info.imagen_perfil;
+        imagenUsuario.alt = `Imagen de perfil de ${info.nombre}`;
+        imagenUsuario.classList.add('imagen-usuario'); 
+        
+        const nombreUsuario = document.createElement('span');
+        nombreUsuario.textContent = info.nombre;
+
+        encabezadoChat.appendChild(imagenUsuario);
+        encabezadoChat.appendChild(nombreUsuario);
+
+    } else{
+        const iconoGrupo = document.createElement('img');
+        iconoGrupo.src = info.icono;
+        iconoGrupo.alt = `Icono de ${info.nombre}`;
+        iconoGrupo.classList.add('icono-grupo'); 
+        
+        const nombreGrupo = document.createElement('span');
+        nombreGrupo.textContent = info.nombre;
+
+        encabezadoChat.appendChild(iconoGrupo);
+        encabezadoChat.appendChild(nombreGrupo);
+    }
 }
 
 /**
