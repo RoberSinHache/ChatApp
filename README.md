@@ -108,33 +108,25 @@ sudo nano /etc/hosts
  ```
 
    	  	 
-
-## Reiniciar Apache:
-   - Reiniciar Apache desde el panel de control de XAMPP para aplicar los cambios.
-
-
+## Reiniciar Apache
+- Reiniciar Apache desde el panel de control de XAMPP para aplicar los cambios.
 
 ## Configuración del Proyecto
 
 1. Descargar y Descomprimir el Proyecto:
-   - Colocar los archivos del proyecto en el directorio htdocs de XAMPP.
- 	- Windows: C:\xampp\htdocs\ChatApp
- 	- Linux y macOS: /opt/lampp/htdocs/ChatApp
-
+   - Colocar los archivos del proyecto en el directorio `htdocs` de XAMPP.
+     - Windows: `C:\xampp\htdocs\ChatApp`
+     - Linux y macOS: `/opt/lampp/htdocs/ChatApp`
 
 2. Configurar la Base de Datos:
    - Crear una base de datos en phpMyAdmin:
- 	- Abrir http://localhost/phpmyadmin en el navegador.
- 	- Crear una nueva base de datos llamada “chatapp”.
+     - Abrir [http://localhost/phpmyadmin](http://localhost/phpmyadmin) en el navegador.
+     - Crear una nueva base de datos llamada `chatapp`.
 
    - Importar el esquema de la base de datos:
- 	- En phpMyAdmin, seleccionar la base de datos creada y usar la opción de 
-  importar para cargar el archivo .sql proporcionado con el proyecto dentro 
-  de la carpeta “db”.
+     - En phpMyAdmin, seleccionar la base de datos creada y usar la opción de importar para cargar el archivo `.sql` proporcionado con el proyecto dentro de la carpeta `db`.
 
-   - Configurar la conexión a la base de datos en el archivo de configuración del 
-     proyecto (includes/config.php), si no se han realizado configuraciones aparte de
-     las mencionadas anteriormente no se ha de sustituir nada:
+   - Configurar la conexión a la base de datos en el archivo de configuración del proyecto (`includes/config.php`). Si no se han realizado configuraciones aparte de las mencionadas anteriormente, no se ha de sustituir nada.
 
  ```php
 <?php
