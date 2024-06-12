@@ -49,10 +49,30 @@
                 <button type="button" id="eliminar-archivo"></button>
             </div>
         </div>
-
     </div>
 
+    <!-- Nueva sección para mostrar usuarios del grupo -->
+    <div id="seccion-usuarios-grupo" class="seccion-usuarios-grupo" style="display: none;">
+        <h3>Usuarios en el Grupo</h3>
+        <div class="lista-usuarios-grupo">
+            <!-- Lista de usuarios del grupo -->
+        </div>
+        <button id="boton-agregar-usuario-grupo" style="display: none;">Agregar usuario al grupo</button>
+    </div>
 
+    <!-- Modal para agregar usuario al grupo -->
+    <div id="agregar-usuario-grupo-modal" class="modal">
+        <div class="contenedor-formulario-previo" style='width: 100%; text-align: center;'>
+            <div class="contenido-modal">
+                <h1>Añadir usuario al grupo</h1>
+                <form id="form-agregar-usuario-grupo" class='formulario-previo' style='align-items: center;'>
+                    <button class="boton-cerrar-modal" id="cerrar-agregar-usuario-grupo-modal"></button>
+                    <input type="text" id="nombre-usuario-agregar-grupo" name="nombre-usuario-agregar-grupo" placeholder='Nombre de usuario' required>
+                    <input type="submit" value='Agregar'>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div id="agregar-usuario-modal" class="modal">
         <div class="contenedor-formulario-previo" style='width: 100%; text-align: center;'>
@@ -85,4 +105,5 @@
     <script src="js/cargar_informacion.js"></script>
     <script src="js/envio_mensaje.js"></script>
     <script src="js/modales.js"></script>
+    <script src="js/grupo_usuarios.js"></script> <!-- Nuevo archivo para manejar la lógica del grupo -->
 </div>

@@ -81,13 +81,9 @@ var campoIdDestinatario = document.getElementById('id_destinatario');
 var campoIdGrupo = document.getElementById('id_grupo');
 
 function cargarMensajes(destinatario, tipo, info) {
-    console.log(destinatario);
-    console.log(tipo);
-
     fetch(`cargar_conversacion.php?destinatario=${destinatario}&tipo=${tipo}`)
         .then(response => response.json())
         .then(mensajes => {
-            console.log(mensajes);
             if (tipo === 'usuario') {
                 campoIdDestinatario.value = destinatario;
                 campoIdGrupo.value = ''; 
