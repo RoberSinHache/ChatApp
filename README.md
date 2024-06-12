@@ -79,6 +79,7 @@ sudo nano /etc/hosts
  	
 ### Windows:
 
+```txt
 <VirtualHost *:80>
         DocumentRoot "C:/xampp/htdocs/ChatApp"
         ServerName chatapp.local
@@ -89,10 +90,11 @@ sudo nano /etc/hosts
                     Require all granted
         </Directory>
 </VirtualHost>
+```
 
 
 ### Linux y macOS:
-   	
+```txt 	
 <VirtualHost *:80>
        	DocumentRoot "/opt/lampp/htdocs/ChatApp"
        	ServerName chatapp.local
@@ -103,7 +105,7 @@ sudo nano /etc/hosts
            	Require all granted
        	</Directory>
    </VirtualHost>
-
+ ```
 
    	  	 
 
@@ -134,59 +136,57 @@ sudo nano /etc/hosts
      proyecto (includes/config.php), si no se han realizado configuraciones aparte de
      las mencionadas anteriormente no se ha de sustituir nada:
 
-    <?php
-    require 'vendor/autoload.php';
+ ```php
+<?php
+require 'vendor/autoload.php';
 
-    $host = '127.0.0.1';
-    $db = 'chatapp';
-    $usuario = 'root';
-    $contrasenia = ‘’;
-    $charset = 'utf8mb4';
+$host = '127.0.0.1';
+$db = 'chatapp';
+$usuario = 'root';
+$contrasenia = '';
+$charset = 'utf8mb4';
 
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $opciones = [
-        PDO::ATTR_ERRMODE        	=> PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opciones = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
-    try {
-        $pdo = new PDO($dsn, $usuario, $contrasenia, $opciones);
-    } catch (\PDOException $e) {
-        throw new \PDOException($e->getMessage(), (int)$e->getCode());
-    }
+try {
+    $pdo = new PDO($dsn, $usuario, $contrasenia, $opciones);
+} catch (\PDOException $e) {
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+}
+?>
+```
 
+- Configurar los datos del correo que se utilizará para mandar las confirmaciones de registro y cambios de contraseña (`includes/mail_config.php`) cambiando las variables `Username`, `Password` y `setFrom`.
+  - El `Username` será el correo que envíe las confirmaciones.
+  - La `Password` es una contraseña de app que ha de crearse en [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) teniendo la sesión de Google iniciada. Si no fuese posible acceder a ese apartado, se recomienda acceder primero a [https://myaccount.google.com/security](https://myaccount.google.com/security) y desde ahí cambiar la URL a [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords).
+  - El `setFrom` es para indicar de nuevo desde el correo desde el que se envían todos los que necesite la app, es decir, el mismo que se indique en el apartado `Username`.
 
+```php
+<?php
+require 'vendor/autoload.php';
 
-   - Configurar los datos del correo que se utilizará para mandar las confirmaciones 
-    de registro y cambios de contraseña (includes/mail_config.php) cambiando las
-    variables “Username”, “Password” y “setFrom”.
-      - El username será el correo que envie las confirmaciones.
-      - La contraseña es una contraseña de app que ha de crearse en https://myaccount.google.com/apppasswords
-        teniendo la sesión de google iniciada. Si no fuese posible acceder a ese apartado, se recomienda acceder primero
-        a https://myaccount.google.com/security y desde ahí cambiar la url a https://myaccount.google.com/apppasswords.
-      - El setFrom es para indicar de nuevo desde el correo desde el que se envían todos los que necesite la app, es decir, 
-        el mismo que se indique en el apartado ¨Username¨
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail->SMTPAuth = true;
+$mail->Username = 'correo@gmail.com';
+$mail->Password = 'contraseña';
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port = 587;
 
-    <?php
-    require 'vendor/autoload.php';
-
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = correo@gmail.com';
-    $mail->Password = contraseña;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-
-    $mail->setFrom(correo@gmail.com', 'ChatApp');
-    $mail->CharSet = "UTF-8";
-    $mail->isHTML(true);
+$mail->setFrom('correo@gmail.com', 'ChatApp');
+$mail->CharSet = "UTF-8";
+$mail->isHTML(true);
+?>
+```
 
 
 # TEST
