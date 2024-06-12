@@ -11,6 +11,7 @@ $id_grupo = isset($_POST['id_grupo']) ? $_POST['id_grupo'] : null;
 $contenido = $_POST['contenido'];
 $tipo_contenido = $_POST['tipo_contenido'];
 $archivo = isset($_FILES['archivo']) ? $_FILES['archivo'] : null;
+$nombre_archivo = null;
 
 $ruta_informacion = strtolower(pathinfo($archivo["name"], PATHINFO_EXTENSION));
 $subida_permitida = 1;
@@ -64,7 +65,7 @@ if ($tipo_contenido == 'imagen' || $tipo_contenido == 'video' || $tipo_contenido
 
     if ($subida_permitida != 0) {
         if (move_uploaded_file($archivo["tmp_name"], $ruta_archivo)) {
-            // Se ha guardado
+            $nombre_archivo = basename($archivo["name"]);
         } else {
             $ruta_archivo = NULL;
             $nombre_archivo = NULL;
