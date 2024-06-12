@@ -179,11 +179,11 @@ $mail->isHTML(true);
 
 Para realizar test se pueden usar las siguientes cuentas:
 
-U: Usuario A
-M: a@a.com
-C: a
+- **Usuario: Usuario A**
+  - **Mail:** a@a.com
+  - **Contraseña:** a
 
-U: Usuario B
-M: b@b.com
-C: b
+- **Usuario: Usuario B**
+  - **Mail:** b@b.com
+  - **Contraseña:** b
 
