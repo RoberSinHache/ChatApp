@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para agregar un usuario al grupo
     function agregarUsuarioAlGrupo(idGrupo, nombreUsuario) {
-        fetch(`agregar_usuario_grupo.php`, {
+        fetch('agregar_usuario_grupo.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

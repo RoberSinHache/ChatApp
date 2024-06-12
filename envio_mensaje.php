@@ -3,6 +3,8 @@ error_reporting(E_ERROR | E_PARSE);
 
 include './includes/common.php';
 
+session_start();
+
 $id_remitente = $_SESSION['id_usuario'];
 $id_destinatario = isset($_POST['id_destinatario']) ? $_POST['id_destinatario'] : null;
 $id_grupo = isset($_POST['id_grupo']) ? $_POST['id_grupo'] : null;
@@ -31,10 +33,8 @@ if (!is_dir($ruta_archivos)) {
     mkdir($ruta_archivos, 0777, true);
 }
 
-if ($archivo["size"] > 5000000) {
-    $subida_permitida = 0;
 
-} else if ($tipo_contenido == 'imagen' || $tipo_contenido == 'video') {
+if ($tipo_contenido == 'imagen' || $tipo_contenido == 'video' || $tipo_contenido == 'archivo') {
     $tipo_archivo = mime_content_type($archivo["tmp_name"]);
 
     if ($tipo_contenido == 'imagen') {
@@ -43,12 +43,16 @@ if ($archivo["size"] > 5000000) {
     } elseif ($tipo_contenido == 'video') {
         $ruta_archivo = $ruta_videos . basename($archivo["name"]);
     
+    } elseif ($tipo_contenido == 'archivo') {
+        $ruta_archivo = $ruta_archivos . basename($archivo["name"]);
+    
     } else {
         $subida_permitida = 0;
     }
 
     $imagenes_permitidas = ["jpg", "jpeg", "png", "gif"];
     $videos_permitidos = ["mp4", "avi", "mov", "wmv"];
+
     if ($subida_permitida) {
         if ($tipo_contenido == 'imagen' && !in_array($ruta_informacion, $imagenes_permitidas)) {
             $subida_permitida = 0;
@@ -59,14 +63,17 @@ if ($archivo["size"] > 5000000) {
     }
 
     if ($subida_permitida != 0) {
-        move_uploaded_file($archivo["tmp_name"], $ruta_archivo);
+        if (move_uploaded_file($archivo["tmp_name"], $ruta_archivo)) {
+            // Se ha guardado
+        } else {
+            $ruta_archivo = NULL;
+            $nombre_archivo = NULL;
+        }
     }
 
-} else if ($tipo_contenido == 'archivo') {
-    $nombre_archivo = basename($archivo['name']);
-    $ruta_archivo = $ruta_archivos . $nombre_archivo;
-
-    move_uploaded_file($archivo['tmp_name'], $ruta_archivo);
+} else {
+    $ruta_archivo = NULL;
+    $nombre_archivo = NULL;
 }
 
 try {
